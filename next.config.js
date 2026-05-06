@@ -4,7 +4,7 @@ const nextConfig = {
   output: 'standalone',
   reactCompiler: false,
   experimental: {
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: ['lucide-react', 'three', '@react-three/drei', 'gsap', 'framer-motion'],
   },
   images: {
     formats: ['image/avif', 'image/webp'],

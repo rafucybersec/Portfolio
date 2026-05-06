@@ -1,4 +1,4 @@
-/* Satoshi Font — self-hosted variable font */
+/* Satoshi Font self-hosted variable font */
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
@@ -131,7 +131,7 @@ body {
     linear-gradient(to bottom, rgba(0, 255, 157, 0.05) 1px, transparent 1px);
 }
 
-/* GSAP handles scroll animations — no CSS reveal classes needed */
+/* GSAP handles scroll animations no CSS reveal classes needed */
 
 /* Screen reader only class */
 .sr-only {

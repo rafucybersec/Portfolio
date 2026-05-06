@@ -7,7 +7,7 @@ import { gsap } from "gsap";
 /**
  * Warp Speed Hyperspace Background
  * 
- * Raw Three.js implementation — WebGLRenderer, BufferGeometry, Points.
+ * Raw Three.js implementation WebGLRenderer, BufferGeometry, Points.
  * Two particle layers: primary stars + dim depth layer.
  * GSAP tweens the speed for warp-in ramp and mouse parallax.
  * 

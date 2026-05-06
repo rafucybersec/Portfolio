@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { rateLimit, checkCooldown } from '@/lib/rate-limit';
 
 // Vercel + Resend Integration (Recommended for Vercel)
 // Resend has native Vercel integration and free tier: 3,000 emails/month
@@ -17,16 +18,10 @@ const BLOCKED_EMAILS = [
   'muhammad.rafayali@outlook.com'
 ];
 
-// Rate limiting store (in-memory, consider Redis for production)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const emailCooldownMap = new Map<string, number>(); // Track last submission time per email
-const recentSubmissions = new Map<string, { message: string; timestamp: number }[]>(); // Track recent submissions for duplicate detection
-
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+// Rate limiting constants
+const RATE_LIMIT_WINDOW = 60; // 1 minute (seconds)
 const RATE_LIMIT_MAX_REQUESTS = 5; // 5 requests per minute per IP
-const EMAIL_COOLDOWN = 5 * 60 * 1000; // 5 minutes between submissions from same email
-const DUPLICATE_CHECK_WINDOW = 15 * 60 * 1000; // 15 minutes to check for duplicates
-const MAX_DUPLICATE_SUBMISSIONS = 2; // Max 2 similar submissions in window
+const EMAIL_COOLDOWN = 5 * 60; // 5 minutes between submissions from same email (seconds)
 
 // Common disposable email domains (partial list - expand as needed)
 const DISPOSABLE_EMAIL_DOMAINS = [
@@ -36,73 +31,6 @@ const DISPOSABLE_EMAIL_DOMAINS = [
   'getairmail.com', 'mintemail.com', 'maildrop.cc', 'meltmail.com'
 ];
 
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
-    return true;
-  }
-
-  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return false;
-  }
-
-  record.count++;
-  return true;
-}
-
-function checkEmailCooldown(email: string): { allowed: boolean; waitTime?: number } {
-  const normalizedEmail = email.toLowerCase().trim();
-  const now = Date.now();
-  const lastSubmission = emailCooldownMap.get(normalizedEmail);
-
-  if (!lastSubmission || now - lastSubmission >= EMAIL_COOLDOWN) {
-    emailCooldownMap.set(normalizedEmail, now);
-    return { allowed: true };
-  }
-
-  const waitTime = Math.ceil((EMAIL_COOLDOWN - (now - lastSubmission)) / 1000 / 60); // minutes
-  return { allowed: false, waitTime };
-}
-
-function checkDuplicateSubmission(email: string, message: string): boolean {
-  const normalizedEmail = email.toLowerCase().trim();
-  const normalizedMessage = message.toLowerCase().trim().replace(/\s+/g, ' '); // Normalize whitespace
-  const now = Date.now();
-
-  // Get recent submissions for this email
-  const recent = recentSubmissions.get(normalizedEmail) || [];
-
-  // Remove old submissions outside the window
-  const validRecent = recent.filter(sub => now - sub.timestamp < DUPLICATE_CHECK_WINDOW);
-
-  // Check for similar messages (simple similarity check - same normalized content)
-  const similarCount = validRecent.filter(sub => {
-    const normalizedSubMessage = sub.message.toLowerCase().trim().replace(/\s+/g, ' ');
-    // Check if messages are very similar (exact match)
-    if (normalizedSubMessage === normalizedMessage) return true;
-    
-    // For longer messages, check if one is contained in the other (with some threshold)
-    const longer = normalizedMessage.length > normalizedSubMessage.length ? normalizedMessage : normalizedSubMessage;
-    const shorter = normalizedMessage.length > normalizedSubMessage.length ? normalizedSubMessage : normalizedMessage;
-    if (longer.includes(shorter) && shorter.length > 50) return true; // Substring match for messages > 50 chars
-    
-    return false;
-  }).length;
-
-  // If we already have too many similar submissions, block this one
-  if (similarCount >= MAX_DUPLICATE_SUBMISSIONS) {
-    return true; // Block duplicate
-  }
-
-  // Add current submission to history
-  validRecent.push({ message: normalizedMessage, timestamp: now });
-  recentSubmissions.set(normalizedEmail, validRecent);
-
-  return false; // Allow submission
-}
 
 function isDisposableEmail(email: string): boolean {
   const domain = email.split('@')[1]?.toLowerCase();
@@ -154,15 +82,16 @@ function isEmailBlocked(email: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
+    // Rate limiting (Upstash Redis-backed, persistent across cold starts)
     const ip = request.headers.get('x-forwarded-for') || 
                request.headers.get('x-real-ip') || 
                'unknown';
     
-    if (!checkRateLimit(ip)) {
+    const rateLimitResult = await rateLimit(`contact:${ip}`, RATE_LIMIT_MAX_REQUESTS, RATE_LIMIT_WINDOW);
+    if (!rateLimitResult.allowed) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
-        { status: 429 }
+        { status: 429, headers: { 'Retry-After': String(rateLimitResult.resetIn) } }
       );
     }
 
@@ -223,20 +152,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check email cooldown (prevent duplicate submissions from same email)
-    const cooldownCheck = checkEmailCooldown(trimmedEmail);
-    if (!cooldownCheck.allowed) {
+    // Check email cooldown (prevent rapid submissions from same email)
+    const cooldownRemaining = await checkCooldown(`email:${trimmedEmail.toLowerCase()}`, EMAIL_COOLDOWN);
+    if (cooldownRemaining > 0) {
+      const waitMinutes = Math.ceil(cooldownRemaining / 60);
       return NextResponse.json(
-        { error: `Please wait ${cooldownCheck.waitTime} minute(s) before submitting again.` },
-        { status: 429 }
-      );
-    }
-
-    // Check for duplicate submissions
-    if (checkDuplicateSubmission(trimmedEmail, trimmedMessage)) {
-      return NextResponse.json(
-        { error: 'Duplicate submission detected. Please wait before submitting a similar message.' },
-        { status: 429 }
+        { error: `Please wait ${waitMinutes} minute(s) before submitting again.` },
+        { status: 429, headers: { 'Retry-After': String(cooldownRemaining) } }
       );
     }
 

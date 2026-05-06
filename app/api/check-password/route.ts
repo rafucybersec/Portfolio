@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
+import { rateLimit } from '@/lib/rate-limit';
 
 // Have I Been Pwned (HIBP) Pwned Passwords API
 // Free tier: https://api.pwnedpasswords.com/range/{prefix} (no API key needed)
@@ -35,6 +36,19 @@ function setCachedRange(prefix: string, data: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting (15 requests per minute per IP)
+    const ip = request.headers.get('x-forwarded-for') || 
+               request.headers.get('x-real-ip') || 
+               'unknown';
+    
+    const rateLimitResult = await rateLimit(`pwd:${ip}`, 15, 60);
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': String(rateLimitResult.resetIn) } }
+      );
+    }
+
     const { password } = await request.json();
 
     if (!password || typeof password !== 'string') {

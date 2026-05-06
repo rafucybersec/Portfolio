@@ -260,7 +260,7 @@ const Hero: React.FC = () => {
             {/* ── Social Icons ── */}
             <div ref={socialsRef} className="flex justify-center lg:justify-start gap-6">
 
-              {/* GitHub — fill-based SVG, color via CSS filter */}
+              {/* GitHub fill-based SVG, color via CSS filter */}
               <a
                 href="https://github.com/0xRafuSec"
                 target="_blank"
@@ -288,7 +288,7 @@ const Hero: React.FC = () => {
                 </svg>
               </a>
 
-              {/* LinkedIn — stroke-based SVG, color via currentColor on the SVG element */}
+              {/* LinkedIn stroke-based SVG, color via currentColor on the SVG element */}
               <a
                 href="https://linkedin.com/in/muhammadrafayali/"
                 target="_blank"
@@ -321,7 +321,7 @@ const Hero: React.FC = () => {
                 </svg>
               </a>
 
-              {/* Instagram — stroke-based SVG, color via explicit stroke */}
+              {/* Instagram stroke-based SVG, color via explicit stroke */}
               <a
                 href="https://instagram.com/rafucybersec/"
                 target="_blank"

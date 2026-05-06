@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response.',
     images: [
       {
-        url: '/og-image.png', // You should create this
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: '0xRafuSec Portfolio',
@@ -116,6 +116,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`scroll-smooth dark ${spaceGrotesk.variable} ${jetBrainsMono.variable} ${cedarvilleCursive.variable}`} suppressHydrationWarning>
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/Satoshi-Variable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="font-sans" suppressHydrationWarning>
         <Providers>
         <StructuredData />

@@ -47,7 +47,7 @@ function fibonacciSphere(n: number, radius: number) {
   return points;
 }
 
-/* ─── Icon texture loader — clean transparent backgrounds ────────── */
+/* Icon texture loader clean transparent backgrounds */
 function useIconTextures(skills: Skill[]) {
   const [textures, setTextures] = useState<(THREE.Texture | null)[]>(() =>
     skills.map(() => null)
@@ -68,7 +68,7 @@ function useIconTextures(skills: Skill[]) {
           canvas.height = size;
           const ctx = canvas.getContext("2d");
           if (!ctx) return resolve(null);
-          // Fully transparent background — no fill
+          // Fully transparent background no fill
           ctx.clearRect(0, 0, size, size);
           // Draw icon centered with padding
           const pad = 48;
@@ -191,7 +191,7 @@ function RotatingGroup({
 
   return (
     <group ref={ref}>
-      {/* Primary wireframe — bright cyber-green */}
+      {/* Primary wireframe bright cyber-green */}
       <mesh>
         <icosahedronGeometry args={[radius - 0.05, 2]} />
         <meshBasicMaterial

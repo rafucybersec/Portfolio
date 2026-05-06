@@ -99,13 +99,13 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 8; // Fast progress
+        return prev + 12; // Faster progress
       });
-    }, 50);
+    }, 40);
 
     timeoutId = setTimeout(() => {
       onComplete();
-    }, 2500); // Reduced from 3000ms to 1500ms
+    }, 1800); // Fast boot for better LCP
 
     return () => {
       clearTimeout(timeoutId);

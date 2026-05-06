@@ -28,7 +28,7 @@ export default function PortfolioContent() {
   const [loading, setLoading] = useState(true)
   const mainRef = useRef<HTMLElement>(null)
 
-  // GSAP ScrollTrigger — animate sections on scroll
+  // GSAP ScrollTrigger animate sections on scroll
   useEffect(() => {
     if (loading || !mainRef.current) return
 

@@ -159,7 +159,7 @@ const HackingSim: React.FC = () => {
                 </div>
                 <div
                     ref={logContainerRef}
-                    className="h-64 p-4 font-mono text-xs md:text-sm overflow-y-auto"
+                    className="h-64 p-4 font-satoshi text-xs md:text-sm overflow-y-auto"
                 >
                     {logs.length === 0 ? (
                         <div className="h-full flex flex-col items-center justify-center text-cyber-green dark:text-cyber-green">

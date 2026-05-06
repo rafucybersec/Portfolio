@@ -9,7 +9,7 @@ export const HeroSkillsCircle = () => {
     <div className="relative w-[460px] h-[520px] flex items-center justify-center">
       {/* ── Cyber background effects ── */}
 
-      {/* Outer radial glow — cyber-green */}
+      {/* Outer radial glow cyber-green */}
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
         style={{
@@ -20,7 +20,7 @@ export const HeroSkillsCircle = () => {
         }}
       />
 
-      {/* Inner accent glow — cyber-blue */}
+      {/* Inner accent glow cyber-blue */}
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
         style={{
@@ -31,7 +31,7 @@ export const HeroSkillsCircle = () => {
         }}
       />
 
-      {/* Dot-grid pattern — hex feel */}
+      {/* Dot-grid pattern hex feel */}
       <svg
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04]"
         width="460"

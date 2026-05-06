@@ -36,7 +36,7 @@ const certifications = [
     name: "Certified in Cybersecurity (CC)",
     issuer: "ISC2",
     date: "2024",
-    link: "#"
+    link: "/certificates/Certified in Cybersecurity.pdf"
   },
   {
     name: "Ethical Hacking & Penetration Testing",
@@ -48,10 +48,10 @@ const certifications = [
     name: "Linux 100",
     issuer: "TCM Security",
     date: "2024",
-    link: "#"
+    link: "/certificates/linux-100-tcm.pdf"
   },
   {
-    name: "Active Lab Profile — Red/Blue Team Practice",
+    name: "Active Lab Profile | Red/Blue Team Practice",
     issuer: "TryHackMe",
     date: "Active",
     link: "https://tryhackme.com/p/0xRafuSec"
