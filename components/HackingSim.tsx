@@ -101,14 +101,14 @@ const HackingSim: React.FC = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto bg-transparent rounded-xl border border-white/10 p-6 md:p-8 shadow-none backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto bg-transparent rounded-xl border border-cyber-green p-4 md:p-8 shadow-none backdrop-blur-sm">
             <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl md:text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-white">
-                    <Activity className="text-cyber-green-dark dark:text-cyber-green" />
-                    Live <span className="text-cyber-blue-dark dark:text-cyber-blue">Threat Simulation</span>
+                <h3 className="text-xl md:text-2xl font-bold flex items-center gap-2 text-white dark:text-white">
+                    <Activity className="text-cyber-green-dark dark:text-cyber-green font-satoshi font-bold" />
+                    Live <span className="text-cyber-blue-dark dark:text-cyber-green font-satoshi font-bold">Threat Simulation</span>
                 </h3>
                 <div className="flex items-center gap-4">
-                    <span className={`text-xs font-mono px-2 py-1 rounded ${isRunning ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 animate-pulse' : 'bg-gray-100 text-gray-500 dark:bg-[#00ff9d]/10'}`}>
+                    <span className={`text-xs font-satoshi px-2 py-1 rounded ${isRunning ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 animate-pulse' : 'bg-cyber-green text-cyber-green dark:bg-[#00ff9d]/10'}`}>
                         {isRunning ? 'ACTIVE' : 'IDLE'}
                     </span>
                     <button
@@ -125,22 +125,22 @@ const HackingSim: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-3 gap-3 md:gap-4 mb-6">
-                <div className="bg-gray-50 dark:bg-[#00ff9d]/5 p-3 md:p-4 rounded-lg text-center border border-gray-200 dark:border-[#00ff9d]/20">
-                    <div className="text-gray-500 dark:text-gray-400 text-[10px] md:text-xs uppercase tracking-wider mb-1 flex items-center justify-center gap-1"><Lock size={10} /> Vulns</div>
-                    <div className="text-xl md:text-2xl font-mono text-yellow-600 dark:text-yellow-500">{stats.vulns}</div>
+                <div className="bg-cyber-green dark:bg-[#00ff9d]/5 p-3 md:p-4 rounded-lg text-center border border-cyber-green-200 dark:border-[#00ff9d]/20">
+                    <div className="font-satoshi text-cyber-green dark:text-cyber-green text-[10px] md:text-xs uppercase tracking-wider mb-1 flex items-center justify-center gap-1"><Lock size={10} /> Vulns</div>
+                    <div className="text-xl md:text-2xl font-satoshi text-yellow-600 dark:text-yellow-500">{stats.vulns}</div>
                 </div>
-                <div className="bg-gray-50 dark:bg-[#00ff9d]/5 p-3 md:p-4 rounded-lg text-center border border-gray-200 dark:border-[#00ff9d]/20">
-                    <div className="text-gray-500 dark:text-gray-400 text-[10px] md:text-xs uppercase tracking-wider mb-1 flex items-center justify-center gap-1"><ShieldAlert size={10} /> Alerts</div>
-                    <div className="text-xl md:text-2xl font-mono text-orange-600 dark:text-orange-500">{stats.alerts}</div>
+                <div className="bg-cyber-green dark:bg-[#00ff9d]/5 p-3 md:p-4 rounded-lg text-center border border-cyber-green-200 dark:border-[#00ff9d]/20">
+                    <div className="font-satoshi text-cyber-green dark:text-cyber-green text-[10px] md:text-xs uppercase tracking-wider mb-1 flex items-center justify-center gap-1"><ShieldAlert size={10} /> Alerts</div>
+                    <div className="text-xl md:text-2xl font-satoshi text-orange-600 dark:text-orange-500">{stats.alerts}</div>
                 </div>
-                <div className="bg-gray-50 dark:bg-[#00ff9d]/5 p-3 md:p-4 rounded-lg text-center border border-gray-200 dark:border-[#00ff9d]/20">
-                    <div className="text-gray-500 dark:text-gray-400 text-[10px] md:text-xs uppercase tracking-wider mb-1 flex items-center justify-center gap-1"><Globe size={10} /> Exploits</div>
-                    <div className="text-xl md:text-2xl font-mono text-red-600 dark:text-red-500">{stats.exploits}</div>
+                <div className="bg-cyber-green dark:bg-[#00ff9d]/5 p-3 md:p-4 rounded-lg text-center border border-cyber-green-200 dark:border-[#00ff9d]/20">
+                    <div className="font-satoshi text-cyber-green dark:text-cyber-green text-[10px] md:text-xs uppercase tracking-wider mb-1 flex items-center justify-center gap-1"><Globe size={10} /> Exploits</div>
+                    <div className="text-xl md:text-2xl font-satoshi text-red-600 dark:text-red-500">{stats.exploits}</div>
                 </div>
             </div>
 
             {/* Progress Bar */}
-            <div className="relative h-2 bg-gray-200 dark:bg-[#00ff9d]/10 rounded-full overflow-hidden mb-6">
+            <div className="relative h-2 bg-cyber-green-200 dark:bg-[#00ff9d]/10 rounded-full overflow-hidden mb-6">
                 <div
                     className="absolute top-0 left-0 h-full bg-cyber-green-dark dark:bg-cyber-green shadow-none dark:shadow-[0_0_10px_#00ff88] transition-all duration-100"
                     style={{ width: `${progress}%` }}
@@ -148,21 +148,21 @@ const HackingSim: React.FC = () => {
             </div>
 
             {/* Console - Always keep dark for that hacker feel, but adjust surrounding if needed */}
-            <div className="rounded-lg overflow-hidden border border-gray-300 dark:border-[#00ff9d]/20 bg-gray-900 dark:bg-[#000d05]/80 shadow-inner">
-                <div className="flex items-center justify-between px-4 py-2 bg-gray-800 dark:bg-[#00ff9d]/10 border-b border-gray-700 dark:border-[#00ff9d]/20">
+            <div className="rounded-lg overflow-hidden border border-cyber-green-300 dark:border-[#00ff9d]/20 bg-cyber-green dark:bg-[#000d05]/80 shadow-inner">
+                <div className="flex items-center justify-between px-4 py-2 bg-cyber-green-800 dark:bg-[#00ff9d]/10 border-b border-cyber-green-700 dark:border-[#00ff9d]/20">
                     <div className="flex items-center gap-2">
-                        <Terminal size={14} className="text-gray-400" />
-                        <span className="text-xs text-gray-300 font-mono">automated_threat_sim.exe</span>
+                        <Terminal size={14} className="text-cyber-green-400" />
+                        <span className="text-xs text-cyber-green font-satoshi">automated_threat_sim.exe</span>
                     </div>
-                    <span className="text-xs font-mono text-cyber-blue">{currentAction}</span>
+                    <span className="text-xs font-satoshi text-cyber-green">{currentAction}</span>
                 </div>
                 <div
                     ref={logContainerRef}
-                    className="h-64 p-4 font-mono text-xs md:text-sm overflow-y-auto"
-                    style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                    className="h-64 p-4 font-satoshi text-xs md:text-sm overflow-y-auto"
+                    style={{ fontFamily: '"JetBrains satoshi", satoshispace' }}
                 >
                     {logs.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-400">
+                        <div className="h-full flex flex-col items-center justify-center text-cyber-green dark:text-cyber-green">
                             <Activity className="mb-2 animate-pulse" size={32} />
                             <span>Ready to launch attack simulation</span>
                         </div>
@@ -171,8 +171,8 @@ const HackingSim: React.FC = () => {
                             <div key={i} className={`mb-1 break-all ${log.includes('[+]') ? 'text-green-400' :
                                     log.includes('[!]') ? 'text-red-400 font-bold' :
                                         log.includes('[*]') ? 'text-blue-400' :
-                                            log.includes('VERBOSE') ? 'text-gray-500' :
-                                                'text-gray-400'
+                                            log.includes('VERBOSE') ? 'text-cyber-green' :
+                                                'text-cyber-green'
                                 }`}>
                                 {log}
                             </div>
@@ -180,7 +180,7 @@ const HackingSim: React.FC = () => {
                     )}
                 </div>
             </div>
-            <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
+            <p className="text-xs text-center text-cyber-green dark:text-cyber-green mt-4">
                 * Simulated attack chain for educational demonstration.
             </p>
         </div>

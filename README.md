@@ -1,14 +1,16 @@
 # 🛡️ 0xRafuSec — Cybersecurity Portfolio
 
-A modern, terminal-themed cybersecurity portfolio built with **Next.js 15**, featuring an interactive "Threat Network" particle background, animated typing sequences, and hands-on security tools — all wrapped in a neon-green hacker aesthetic.
+A modern, terminal-themed cybersecurity portfolio built with **Next.js 16**, featuring an interactive "Threat Network" particle background, a 3D skill globe (Three.js), animated typing sequences, and hands-on security tools — all wrapped in a neon-green hacker aesthetic with the **Satoshi** typeface.
 
 <p align="center">
   <a href="https://rafucybersec.vercel.app" target="_blank"><strong>🌐 Live Site →</strong></a>
 </p>
 
-![Next.js](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)
+![Next.js](https://img.shields.io/badge/Next.js-16.2-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.2-38B2AC?logo=tailwind-css)
+![Three.js](https://img.shields.io/badge/Three.js-0.184-black?logo=three.js)
+![GSAP](https://img.shields.io/badge/GSAP-3.15-88CE02?logo=greensock)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?logo=framer)
 ![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?logo=vercel)
 
@@ -38,6 +40,8 @@ A modern, terminal-themed cybersecurity portfolio built with **Next.js 15**, fea
 - **"Available For Hire" glow pulse** — animated badge with box-shadow glow
 - **Glassmorphism cards**, smooth scroll (Lenis), and Framer Motion transitions
 - **Splash screen** — fast boot sequence with scanline effect
+- **3D Skill Globe** — Three.js/R3F icosahedron with Fibonacci-distributed skill icons
+- **Satoshi typeface** — modern sans-serif body font (Fontshare), mono reserved for Navbar
 
 ---
 
@@ -81,14 +85,16 @@ npm run build
 
 | Category      | Technology                              |
 | ------------- | --------------------------------------- |
-| Framework     | Next.js 15 (App Router)                 |
-| Language      | TypeScript 5.7                          |
-| Styling       | Tailwind CSS 3.4                        |
-| Animations    | Framer Motion, CSS Keyframes, Canvas 2D |
-| Smooth Scroll | Lenis                                   |
-| Icons         | Lucide React                            |
-| Email         | Resend API                              |
-| Deployment    | Vercel                                  |
+| Framework     | Next.js 16 (App Router)                            |
+| Language      | TypeScript 6.0                                     |
+| Styling       | Tailwind CSS 4.2                                   |
+| 3D / WebGL    | Three.js, React Three Fiber, React Three Drei       |
+| Animations    | GSAP, Framer Motion, CSS Keyframes, Canvas 2D       |
+| Typography    | Satoshi (Fontshare), JetBrains Mono, Cedarville Cursive |
+| Smooth Scroll | Lenis                                              |
+| Icons         | Lucide React + custom SVG/PNG brand icons           |
+| Email         | Resend API                                         |
+| Deployment    | Vercel                                             |
 
 ---
 
@@ -109,10 +115,11 @@ rafu-portfolio/
 │   ├── page.tsx              # Home entry point
 │   ├── robots.ts             # SEO robots config
 │   └── sitemap.ts            # SEO sitemap generator
-├── components/               # 20 React components
+├── components/               # 21 React components
 │   ├── PortfolioContent.tsx   # Main layout orchestrator
 │   ├── StarBackground.tsx     # Global "Threat Network" canvas animation
 │   ├── Hero.tsx               # Hero section with typing animations
+│   ├── HeroGlobe.tsx          # 3D Three.js skill globe (Fibonacci sphere)
 │   ├── HeroSkillsCircle.tsx   # Animated skills orbit
 │   ├── SplashScreen.tsx       # Boot sequence splash screen
 │   ├── Terminal.tsx           # Interactive CLI emulator

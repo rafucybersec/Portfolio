@@ -53,3 +53,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+.agent/*
+graphify-out/*

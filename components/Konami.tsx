@@ -41,10 +41,10 @@ const Konami: React.FC = () => {
           <Unlock size={32} />
         </div>
         
-        <h2 className="text-2xl font-bold text-white mb-2 font-mono">ACCESS GRANTED</h2>
-        <p className="text-cyber-green font-mono text-sm mb-6">You found the hidden flag!</p>
+        <h2 className="text-2xl font-bold text-white mb-2 font-satoshi">ACCESS GRANTED</h2>
+        <p className="text-cyber-green font-satoshi text-sm mb-6">You found the hidden flag!</p>
         
-        <div className="bg-black p-4 rounded border border-gray-700 font-mono text-cyber-blue text-lg">
+        <div className="bg-black p-4 rounded border border-gray-700 font-satoshi text-cyber-blue text-lg">
           {`{FLAG: HIRED_ME_YET?}`}
         </div>
         

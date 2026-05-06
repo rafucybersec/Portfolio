@@ -112,13 +112,13 @@ const PasswordAnalyzer: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-24">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Password <span className="text-cyber-green-dark dark:text-cyber-green">Auditor</span></h2>
+      <h2 className="text-3xl font-satoshi font-bold text-center mb-8 text-white-900 dark:text-white">Password <span className="text-cyber-green-dark dark:text-cyber-green">Auditor</span></h2>
 
-      <div className="bg-transparent border border-white/10 rounded-2xl p-8 shadow-none backdrop-blur-sm flex flex-col md:flex-row gap-12">
+      <div className="bg-transparent border border-cyber-green-dark rounded-2xl p-8 shadow-none backdrop-blur-sm flex flex-col md:flex-row gap-12">
 
         <div className="flex-1">
           <div className="relative mb-6">
-            <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-cyber-muted" size={20} />
+            <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyber-green dark:text-cyber-green" size={20} />
             <input
               type={isVisible ? "text" : "password"}
               value={password}
@@ -126,22 +126,22 @@ const PasswordAnalyzer: React.FC = () => {
               placeholder="Enter password to analyze..."
               id="password-input"
               aria-label="Password to analyze"
-              className="w-full bg-gray-50 dark:bg-[#00ff9d]/5 border border-gray-300 dark:border-gray-700 rounded-lg py-4 pl-12 pr-12 text-gray-900 dark:text-white focus:border-cyber-green-dark dark:focus:border-cyber-green focus:ring-1 focus:ring-cyber-green-dark dark:focus:ring-cyber-green outline-none transition-all"
+              className="w-full bg-white dark:bg-[#00ff9d]/5 border border-cyber-green-dark dark:border-cyber-green rounded-lg py-4 pl-12 pr-12 text-cyber-green dark:text-cyber-green focus:border-cyber-green-dark dark:focus:border-cyber-green focus:ring-1 focus:ring-cyber-green-dark dark:focus:ring-cyber-green outline-none transition-all"
             />
             <button
               onClick={() => setIsVisible(!isVisible)}
               aria-label={isVisible ? 'Hide password' : 'Show password'}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-cyber-muted hover:text-gray-900 dark:hover:text-white"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-cyber-green-dark dark:text-cyber-green hover:text-cyber-green-dark dark:hover:text-cyber-green"
             >
               {isVisible ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
           <div className="mb-2 flex justify-between items-center">
-            <span className="text-sm text-gray-600 dark:text-cyber-muted">Strength Score</span>
-            <span className={`text-lg font-bold ${details.text}`}>{details.label} ({strength}%)</span>
+            <span className="text-sm text-white-600 dark:text-white">Strength Score</span>
+            <span className={`text-lg font-satoshi font-bold ${details.text}`}>{details.label} ({strength}%)</span>
           </div>
-          <div className="h-3 bg-gray-200 dark:bg-[#00ff9d]/10 rounded-full overflow-hidden mb-6">
+          <div className="h-3 bg-white-200 dark:bg-[#00ff9d]/10 rounded-full overflow-hidden mb-6">
             <div
               className={`h-full ${details.color} transition-all duration-500`}
               style={{ width: `${strength}%` }}
@@ -162,37 +162,37 @@ const PasswordAnalyzer: React.FC = () => {
                 </div>
               </div>
             )}
-            <p className="text-sm text-gray-500 dark:text-cyber-muted">
+            <p className="text-sm text-white-500 dark:text-white">
               Password analysis checks against Have I Been Pwned database (11+ billion breached passwords).
             </p>
           </div>
         </div>
 
-        <div className="flex-1 border-t md:border-t-0 md:border-l border-gray-200 dark:border-white/10 pt-8 md:pt-0 md:pl-12">
-          <h3 className="text-gray-900 dark:text-white font-bold mb-4">Security Checklist</h3>
+        <div className="flex-1 border-t md:border-t-0 md:border-l border-white-200 dark:border-white/10 pt-8 md:pt-0 md:pl-12">
+          <h3 className="text-white-900 dark:text-cyber-green font-satoshi font-bold mb-4">Security Checklist</h3>
           <div className="space-y-3">
             {checks.map((check: any, i: number) => (
               <div key={i} className="flex items-center gap-3">
                 {check.isLoading ? (
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center border border-gray-300 dark:border-gray-600">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center border border-white-300 dark:border-white-600">
                     <div className="w-3 h-3 border-2 border-cyber-green-dark dark:border-cyber-green border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 ) : (
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center border ${check.isBreached
-                      ? 'bg-red-500/20 border-red-500 text-red-500'
-                      : check.valid
-                        ? 'bg-cyber-green-dark/20 dark:bg-cyber-green/20 border-cyber-green-dark dark:border-cyber-green text-cyber-green-dark dark:text-cyber-green'
-                        : 'bg-red-500/10 border-red-500/30 text-red-500'
+                    ? 'bg-red-500/20 border-red-500 text-red-500'
+                    : check.valid
+                      ? 'bg-cyber-green-dark/20 dark:bg-cyber-green/20 border-cyber-green-dark dark:border-cyber-green text-cyber-green-dark dark:text-cyber-green'
+                      : 'bg-red-500/10 border-red-500/30 text-red-500'
                     }`}>
                     {check.isBreached || !check.valid ? <X size={14} /> : <Check size={14} />}
                   </div>
                 )}
                 <span className={
                   check.isBreached
-                    ? 'text-red-600 dark:text-red-400 font-medium'
+                    ? 'text-red-600 dark:text-red-400 font-satoshi font-normal text-s'
                     : check.valid
-                      ? 'text-gray-800 dark:text-white'
-                      : 'text-gray-500 dark:text-cyber-muted'
+                      ? 'text-cyber-green-dark dark:text-cyber-green font-satoshi font-normal text-s'
+                      : 'text-white/50 dark:text-white/95 font-satoshi font-normal text-s'
                 }>
                   {check.label}
                 </span>

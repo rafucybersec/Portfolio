@@ -13,9 +13,10 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
-        body: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
+        sans: ['Satoshi', 'var(--font-space-grotesk)', 'sans-serif'],
+        body: ['Satoshi', 'var(--font-space-grotesk)', 'sans-serif'],
         mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
+        satoshi: ['Satoshi', 'sans-serif'],
       },
       colors: {
         cyber: {

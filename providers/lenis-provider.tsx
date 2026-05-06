@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 

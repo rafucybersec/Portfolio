@@ -2,9 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
-  // React 19 compatibility
+  reactCompiler: false,
   experimental: {
-    reactCompiler: false,
     optimizePackageImports: ['lucide-react'],
   },
   images: {

@@ -256,11 +256,11 @@ const Terminal: React.FC = () => {
   const quickCommands = ['help', 'ls', 'whoami', 'pwd', 'clear'];
 
   return (
-    <div className="w-full max-w-3xl mx-auto font-mono text-sm shadow-[0_0_50px_rgba(0,255,157,0.1)] rounded-lg overflow-hidden border border-white/10 dark:border-[#00ff9d]/20 backdrop-blur-md bg-white/5 dark:bg-[#00ff9d]/[0.02]">
+    <div className="w-full max-w-3xl mx-auto font-satoshi text-sm shadow-[0_0_50px_rgba(0,255,157,0.1)] rounded-lg overflow-hidden border border-cyber-green-dark dark:border-cyber-green backdrop-blur-md bg-white/5 dark:bg-[#00ff9d]/[0.02]">
       <div className="flex items-center justify-between bg-gray-100/90 dark:bg-[#00ff9d]/10 px-4 py-2 border-b border-gray-200 dark:border-[#00ff9d]/20">
         <div className="flex items-center gap-2">
-          <TerminalIcon size={14} className="text-gray-500 dark:text-gray-400" />
-          <span className="text-gray-600 dark:text-gray-400 text-xs">guest@rafay-portfolio:~</span>
+          <TerminalIcon size={14} className="text-cyber-green-dark dark:text-cyber-green" />
+          <span className="text-cyber-green-dark dark:text-cyber-green font-satoshi font-bold text-xs">guest@rafay-portfolio:~</span>
         </div>
         <div className="flex gap-2">
           <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
@@ -276,10 +276,10 @@ const Terminal: React.FC = () => {
       >
         {history.map((line, i) => (
           <div key={i} className="group relative mb-1">
-            <div className={`whitespace-pre-wrap leading-relaxed ${line.type === 'input' ? 'text-gray-800 dark:text-white font-bold mt-4' :
+            <div className={`whitespace-pre-wrap leading-relaxed ${line.type === 'input' ? 'text-gray-800 dark:text-cyber-green font-satoshi font-bold mt-4' :
                 line.type === 'error' ? 'text-red-600 dark:text-red-400' :
                   line.type === 'success' ? 'text-green-600 dark:text-green-400' :
-                    'text-gray-600 dark:text-cyber-green'
+                    'text-gray-600 dark:text-cyber-blue'
               }`}>
               {line.content}
             </div>
@@ -297,7 +297,7 @@ const Terminal: React.FC = () => {
         ))}
 
         {isProcessing && (
-          <div className="flex items-center gap-2 text-cyber-green mt-2 animate-pulse">
+          <div className="flex items-center gap-2 text-cyber-blue mt-2 animate-pulse">
             <Loader size={14} className="animate-spin" />
             <span>Processing...</span>
           </div>
@@ -305,14 +305,14 @@ const Terminal: React.FC = () => {
 
         {!isProcessing && (
           <div className="flex items-center gap-2 mt-2">
-            <span className="text-blue-600 dark:text-cyber-blue whitespace-nowrap font-bold">guest@rafay-portfolio:{currentDir}$</span>
+            <span className="text-cyber-green-dark dark:text-cyber-green whitespace-nowrap font-satoshi font-bold">guest@rafay-portfolio:{currentDir}$</span>
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="bg-transparent border-none outline-none flex-1 text-gray-800 dark:text-white min-w-[50px] caret-cyber-green-dark dark:caret-cyber-green"
+              className="bg-transparent border-none outline-none flex-1 text-cyber-blue dark:text-cyber-blue min-w-[50px] caret-cyber-blue dark:caret-cyber-blue"
               autoComplete="off"
             />
           </div>
@@ -325,7 +325,7 @@ const Terminal: React.FC = () => {
             key={cmd}
             onClick={() => handleCommand(cmd)}
             disabled={isProcessing}
-            className="px-3 py-1 bg-white dark:bg-[#00ff9d]/10 border border-gray-300 dark:border-[#00ff9d]/20 rounded hover:border-cyber-green-dark dark:hover:border-cyber-green hover:text-cyber-green-dark dark:hover:text-cyber-green text-xs text-gray-600 dark:text-gray-300 transition-colors disabled:opacity-50"
+            className="px-3 py-1 bg-cyber-green dark:bg-[#00ff9d]/10 border border-gray-300 dark:border-[#00ff9d]/20 rounded hover:border-cyber-green-dark dark:hover:border-cyber-green hover:text-cyber-green-dark dark:hover:text-cyber-green text-xs text-cyber-green-dark dark:text-cyber-green transition-colors disabled:opacity-50"
             aria-label={`Run ${cmd} command`}
           >
             {cmd}

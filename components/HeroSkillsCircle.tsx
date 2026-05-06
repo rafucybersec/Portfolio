@@ -1,126 +1,112 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import RadarPulse from "./RadarPulse";
+import dynamic from "next/dynamic";
 
-// Skill icons using actual images like space-portfolio
-const skills = [
-    { name: "Wazuh", icon: "/icons/wazuh.svg", top: "20%", left: "55%" },
-    { name: "Docker", icon: "/icons/docker.svg", top: "28%", left: "72%" },
-    { name: "Python", icon: "/icons/python.png", top: "42%", left: "79%" },
-    { name: "GitHub", icon: "/icons/github.svg", top: "56%", left: "78%" },
-    { name: "Linux", icon: "/icons/linux.svg", top: "68%", left: "65%" },
-    { name: "Burp Suite", icon: "/icons/burp.png", top: "74%", left: "48%" },
-    { name: "Metasploit", icon: "/icons/Metasploit.svg", top: "72%", left: "29%" },
-    { name: "Networks", icon: "/icons/threat.svg", top: "62%", left: "14%" },
-    { name: "PowerShell", icon: "/icons/powershell.svg", top: "46%", left: "9%" },
-    { name: "Mitre", icon: "/icons/mitre.png", top: "30%", left: "14%" },
-    { name: "Kali", icon: "/icons/kali.svg", top: "19%", left: "32%" },
-];
+const HeroGlobe = dynamic(() => import("./HeroGlobe"), { ssr: false });
 
 export const HeroSkillsCircle = () => {
-    return (
-        <div className="relative w-[400px] h-[500px]">
-            {/* Radar pulse effect behind icons */}
-            <RadarPulse />
-            <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ willChange: 'transform' }}
-            >
-                <svg
-                    width="300"
-                    height="300"
-                    viewBox="0 0 300 300"
-                    className="opacity-50"
-                >
-                    <circle
-                        cx="150"
-                        cy="150"
-                        r="140"
-                        fill="none"
-                        stroke="#00ff9d"
-                        strokeWidth="1"
-                        strokeDasharray="10 5"
-                    />
-                    <circle
-                        cx="150"
-                        cy="150"
-                        r="110"
-                        fill="none"
-                        stroke="#00ff9d"
-                        strokeWidth="0.5"
-                        strokeDasharray="5 10"
-                    />
-                </svg>
-            </motion.div>
+  return (
+    <div className="relative w-[460px] h-[520px] flex items-center justify-center">
+      {/* ── Cyber background effects ── */}
 
-            {/* Counter-rotating ring */}
-            <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ willChange: 'transform' }}
-            >
-                <svg
-                    width="250"
-                    height="250"
-                    viewBox="0 0 250 250"
-                    className="opacity-40"
-                >
-                    <circle
-                        cx="125"
-                        cy="125"
-                        r="120"
-                        fill="none"
-                        stroke="#00ff9d"
-                        strokeWidth="1"
-                        strokeDasharray="15 8"
-                    />
-                </svg>
-            </motion.div>
+      {/* Outer radial glow — cyber-green */}
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+        style={{
+          width: 520,
+          height: 520,
+          background:
+            "radial-gradient(circle, rgba(0,255,157,0.06) 0%, rgba(0,255,157,0.02) 40%, transparent 70%)",
+        }}
+      />
 
+      {/* Inner accent glow — cyber-blue */}
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+        style={{
+          width: 300,
+          height: 300,
+          background:
+            "radial-gradient(circle, rgba(0,225,255,0.04) 0%, transparent 60%)",
+        }}
+      />
 
-            {/* Floating skill icons */}
-            {skills.map((skill, index) => (
-                <motion.div
-                    key={skill.name}
-                    className="absolute w-12 h-12"
-                    style={{ top: skill.top, left: skill.left, transform: "translate(-50%, -50%)" }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{
-                        opacity: 1,
-                        scale: 1,
-                        y: [0, -8, 0]
-                    }}
-                    transition={{
-                        delay: index * 0.15,
-                        duration: 0.5,
-                        y: {
-                            duration: 4 + index * 0.5,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }
-                    }}
-                >
-                    <div className="w-12 h-12 rounded-xl bg-0 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:scale-110 hover:border-[#00ff9d]/50 transition-all duration-300 cursor-pointer group">
-                        <Image
-                            src={skill.icon}
-                            alt={skill.name}
-                            width={28}
-                            height={28}
-                            className="object-contain"
-                        />
-                    </div>
-                    <span className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-[10px] font-mono text-[#00ff9d] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        {skill.name}
-                    </span>
-                </motion.div>
-            ))}
-        </div>
-    );
+      {/* Dot-grid pattern — hex feel */}
+      <svg
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.04]"
+        width="460"
+        height="460"
+        viewBox="0 0 460 460"
+      >
+        <defs>
+          <pattern id="hero-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="1" fill="#00ff9d" />
+          </pattern>
+          <mask id="hero-dot-mask">
+            <radialGradient id="hero-dot-fade" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="white" />
+              <stop offset="70%" stopColor="white" />
+              <stop offset="100%" stopColor="black" />
+            </radialGradient>
+            <rect width="460" height="460" fill="url(#hero-dot-fade)" />
+          </mask>
+        </defs>
+        <rect width="460" height="460" fill="url(#hero-dots)" mask="url(#hero-dot-mask)" />
+      </svg>
+
+      {/* Decorative orbit rings */}
+      <svg
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        width="440"
+        height="440"
+        viewBox="0 0 440 440"
+      >
+        <circle
+          cx="220" cy="220" r="210"
+          fill="none" stroke="#00ff9d" strokeWidth="0.4"
+          strokeDasharray="4 10" opacity="0.12"
+        >
+          <animateTransform attributeName="transform" type="rotate"
+            from="0 220 220" to="360 220 220" dur="90s" repeatCount="indefinite" />
+        </circle>
+        <circle
+          cx="220" cy="220" r="175"
+          fill="none" stroke="#00ff9d" strokeWidth="0.3"
+          strokeDasharray="2 14" opacity="0.08"
+        >
+          <animateTransform attributeName="transform" type="rotate"
+            from="360 220 220" to="0 220 220" dur="70s" repeatCount="indefinite" />
+        </circle>
+        <circle
+          cx="220" cy="220" r="130"
+          fill="none" stroke="#00e1ff" strokeWidth="0.25"
+          strokeDasharray="1.5 18" opacity="0.06"
+        >
+          <animateTransform attributeName="transform" type="rotate"
+            from="0 220 220" to="360 220 220" dur="120s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+
+      {/* Scanline sweep */}
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none overflow-hidden rounded-full"
+        style={{ width: 400, height: 400 }}
+      >
+        <div
+          className="w-full animate-scanline"
+          style={{
+            height: "1px",
+            background: "linear-gradient(90deg, transparent, rgba(0,255,157,0.12), transparent)",
+          }}
+        />
+      </div>
+
+      {/* ── Three.js Globe ── */}
+      <div className="relative w-full h-full">
+        <HeroGlobe />
+      </div>
+    </div>
+  );
 };
 
 export default HeroSkillsCircle;

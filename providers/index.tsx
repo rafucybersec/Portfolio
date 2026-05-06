@@ -1,7 +1,7 @@
-import React from "react";
+import { ReactNode } from "react";
 import LenisProvider from "./lenis-provider";
 
-const Providers = ({ children }: { children: React.ReactNode }) => {
+const Providers = ({ children }: { children: ReactNode }) => {
   return <LenisProvider>{children}</LenisProvider>;
 };
 

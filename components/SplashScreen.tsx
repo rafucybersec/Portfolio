@@ -115,11 +115,11 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 bg-black z-[100] flex flex-col items-center justify-center font-mono text-green-500 overflow-hidden">
+    <div className="fixed inset-0 bg-black z-[100] flex flex-col items-center justify-center font-satoshi text-green-500 overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 opacity-30" />
       
       <div className="relative z-10 w-full max-w-lg p-6 bg-black/80 border border-green-500/30 rounded-lg shadow-[0_0_50px_rgba(0,255,0,0.1)] backdrop-blur-sm">
-        <div className="h-64 overflow-hidden mb-6 font-mono text-sm md:text-base">
+        <div className="h-64 overflow-hidden mb-6 font-satoshi text-sm md:text-base">
           {lines.map((line, index) => (
             <div key={index} className="flex items-center gap-2 mb-1">
               <span className="text-blue-400">{'>'}</span>

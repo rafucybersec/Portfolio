@@ -62,7 +62,7 @@ const Certifications: React.FC = () => {
   return (
     <section id="certifications" className="py-20 scroll-mt-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white font-sans">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white dark:text-white font-satoshi">
            Professional <span className="text-cyber-green-dark dark:text-cyber-green">Certifications</span>
         </h2>
         
@@ -77,13 +77,13 @@ const Certifications: React.FC = () => {
             >
               <div className="absolute inset-0 bg-cyber-green-dark/5 dark:bg-cyber-green/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               
-              <div className="flex-shrink-0 w-12 h-12 bg-gray-100 dark:bg-[#00ff9d]/10 rounded-full flex items-center justify-center text-cyber-green-dark dark:text-cyber-green border border-cyber-green-dark/20 dark:border-cyber-green/20 relative z-10">
+              <div className="flex-shrink-0 w-12 h-12 bg-white dark:bg-[#00ff9d]/10 rounded-full flex items-center justify-center text-cyber-green-dark dark:text-cyber-green border border-cyber-green-dark/20 dark:border-cyber-green/20 relative z-10 transition-all duration-500 group-hover:scale-[1.2] group-hover:rotate-[360deg]">
                 <Award size={24} />
               </div>
               
               <div className="flex-1 relative z-10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-sm font-sans pr-6">{cert.name}</h3>
-                <p className="text-blue-600 dark:text-cyber-blue text-xs mt-1 font-mono">{cert.issuer}</p>
+                <h3 className="font-bold text-cyber-green-dark dark:text-cyber-green text-sm font-satoshi pr-6">{cert.name}</h3>
+                <p className="text-white dark:text-cyber-white text-xs mt-1 font-satoshi">{cert.issuer}</p>
               </div>
 
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0 translate-x-4">

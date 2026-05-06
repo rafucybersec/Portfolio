@@ -101,7 +101,7 @@ export default function PortfolioContent() {
       {/* Hidden Hint for CTF Players */}
       {/* Hint: Try the Konami Code... (Up, Up, Down, Down, Left, Right, Left, Right, B, A) */}
 
-      <div className={`min-h-screen relative font-sans selection:bg-cyber-green-dark dark:selection:bg-cyber-green selection:text-white dark:selection:text-black transition-colors duration-300 ${loadingClass}`}>
+      <div className={`min-h-screen relative font-satoshi selection:bg-cyber-green-dark dark:selection:bg-cyber-green selection:text-white dark:selection:text-black transition-colors duration-300 ${loadingClass}`}>
 
         {!loading && (
           <>
@@ -128,10 +128,10 @@ export default function PortfolioContent() {
               <section id="interactive" className="py-20 relative overflow-hidden scroll-mt-20">
                 <div className="container mx-auto px-4 space-y-24 relative z-10">
                   <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-sans">
-                      Interactive <span className="text-cyber-green-dark dark:text-cyber-green">Terminal</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-satoshi font-bold">
+                      Interactive <span className="text-cyber-green-dark dark:text-cyber-green font-satoshi font-bold">Terminal</span>
                     </h2>
-                    <p className="text-gray-600 dark:text-cyber-muted mt-2 font-mono">Execute commands, simulate attacks, and analyze security.</p>
+                    <p className="text-gray-600 dark:text-white mt-2 font-satoshi">Execute commands, simulate attacks, and analyze security.</p>
                   </div>
                   <Terminal />
                   <HackingSim />
