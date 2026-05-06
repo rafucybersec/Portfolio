@@ -23,6 +23,7 @@ const Konami = dynamic(() => import('./Konami'), { ssr: false })
 const BackToTop = dynamic(() => import('./BackToTop'))
 const Encryption = dynamic(() => import('./Encryption'))
 const StarsCanvas = dynamic(() => import('./StarBackground'), { ssr: false })
+const TargetCursor = dynamic(() => import('./TargetCursor'), { ssr: false })
 
 export default function PortfolioContent() {
   const [loading, setLoading] = useState(true)
@@ -106,6 +107,7 @@ export default function PortfolioContent() {
         {!loading && (
           <>
             <Konami />
+            <TargetCursor />
 
             {/* Global Backgrounds - Space Theme with GREEN tint */}
             <div className="fixed inset-0 z-0 bg-gradient-to-b from-[#020a05] via-[#030a06] to-[#020a04]"></div>

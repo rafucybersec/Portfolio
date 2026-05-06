@@ -69,6 +69,13 @@
   box-sizing: border-box;
 }
 
+/* Hide default cursor on desktop (TargetCursor replaces it) */
+@media (hover: hover) and (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
