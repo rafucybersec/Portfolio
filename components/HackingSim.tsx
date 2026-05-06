@@ -8,6 +8,7 @@ const HackingSim: React.FC = () => {
     const [stats, setStats] = useState({ vulns: 0, exploits: 0, alerts: 0 });
     const [currentAction, setCurrentAction] = useState('IDLE');
     const logContainerRef = useRef<HTMLDivElement>(null);
+    const MAX_LOGS = 200;
 
     useEffect(() => {
         if (logContainerRef.current) {
@@ -49,13 +50,13 @@ const HackingSim: React.FC = () => {
             // Random background noise
             if (Math.random() > 0.9) {
                 const randomPort = Math.floor(Math.random() * 65535);
-                setLogs(prev => [...prev, `[VERBOSE] Port ${randomPort} filtered`]);
+                setLogs(prev => [...prev, `[VERBOSE] Port ${randomPort} filtered`].slice(-MAX_LOGS));
             }
 
             if (currentPhase < phases.length) {
                 if (phaseTime === 0) {
                     const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false });
-                    setLogs(prev => [...prev, `[${timestamp}] [*] ${phases[currentPhase].msg}`]);
+                    setLogs(prev => [...prev, `[${timestamp}] [*] ${phases[currentPhase].msg}`].slice(-MAX_LOGS));
                     setCurrentAction(phases[currentPhase].name);
 
                     // Stat updates
@@ -69,7 +70,7 @@ const HackingSim: React.FC = () => {
                 // Visual effects for specific phases
                 if (phases[currentPhase].name === 'DATA' && Math.random() > 0.7) {
                     const hex = Array.from({ length: 8 }, () => Math.floor(Math.random() * 256).toString(16).padStart(2, '0')).join(' ');
-                    setLogs(prev => [...prev, `    DUMP: ${hex} ...`]);
+                    setLogs(prev => [...prev, `    DUMP: ${hex} ...`].slice(-MAX_LOGS));
                 }
 
                 if (phaseTime >= phases[currentPhase].duration) {
@@ -78,7 +79,7 @@ const HackingSim: React.FC = () => {
                 }
             } else {
                 setIsRunning(false);
-                setLogs(prev => [...prev, `[+] OPERATION COMPLETE. DISCONNECTING.`]);
+                setLogs(prev => [...prev, `[+] OPERATION COMPLETE. DISCONNECTING.`].slice(-MAX_LOGS));
                 setCurrentAction('DONE');
                 clearInterval(interval);
             }
@@ -90,7 +91,7 @@ const HackingSim: React.FC = () => {
     const handleToggle = () => {
         if (isRunning) {
             setIsRunning(false);
-            setLogs(prev => [...prev, `[!] Aborted by user.`]);
+            setLogs(prev => [...prev, `[!] Aborted by user.`].slice(-MAX_LOGS));
             setCurrentAction('ABORTED');
         } else {
             setLogs([]);
@@ -158,8 +159,7 @@ const HackingSim: React.FC = () => {
                 </div>
                 <div
                     ref={logContainerRef}
-                    className="h-64 p-4 font-satoshi text-xs md:text-sm overflow-y-auto"
-                    style={{ fontFamily: '"JetBrains satoshi", satoshispace' }}
+                    className="h-64 p-4 font-mono text-xs md:text-sm overflow-y-auto"
                 >
                     {logs.length === 0 ? (
                         <div className="h-full flex flex-col items-center justify-center text-cyber-green dark:text-cyber-green">

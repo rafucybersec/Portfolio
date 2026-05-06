@@ -423,11 +423,7 @@ export async function POST(request: NextRequest) {
       if (error) {
         console.error('Resend API error:', JSON.stringify(error, null, 2));
         return NextResponse.json(
-          { 
-            error: 'Failed to send message', 
-            details: error.message || 'Unknown Resend error',
-            errorCode: error.name 
-          },
+          { error: 'Failed to send message. Please try again later.' },
           { status: 500 }
         );
       }
@@ -436,11 +432,7 @@ export async function POST(request: NextRequest) {
     } catch (resendError: any) {
       console.error('Resend exception:', resendError);
       return NextResponse.json(
-        { 
-          error: 'Failed to send message', 
-          details: resendError?.message || 'Resend service error',
-          errorType: resendError?.name || 'UnknownError'
-        },
+        { error: 'Failed to send message. Please try again later.' },
         { status: 500 }
       );
     }
@@ -458,11 +450,7 @@ export async function POST(request: NextRequest) {
       stack: error?.stack,
     });
     return NextResponse.json(
-      { 
-        error: 'Failed to send message',
-        details: error?.message || 'Unknown error occurred',
-        errorType: error?.name || 'Error'
-      },
+      { error: 'Failed to send message. Please try again later.' },
       { status: 500 }
     );
   }

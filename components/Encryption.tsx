@@ -14,10 +14,10 @@ export const Encryption = () => {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="text-[32px] md:text-[40px] font-medium text-center text-gray-800 dark:text-gray-200"
+                        className="text-[32px] md:text-[40px] font-satoshi font-bold text-center text-gray-800 dark:text-gray-200"
                     >
                         Performance{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-green-dark to-cyber-green dark:from-cyber-green dark:to-cyber-green">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-green-dark to-cyber-green dark:from-cyber-green dark:to-cyber-green font-satoshi font-bold">
                             &amp; Security
                         </span>
                     </motion.div>
@@ -41,7 +41,7 @@ export const Encryption = () => {
                         />
                     </div>
 
-                    <div className="Welcome-box px-[15px] py-[4px] z-[20] border my-[20px] border-cyber-green dark:border-cyber-green opacity-[1]">
+                    <div className="Welcome-box px-[15px] py-[4px] z-[20] border my-[20px] border-cyber-green dark:border-cyber-green opacity-[1] font-satoshi font-bold">
                         <span className="Welcome-text text-[12px]">Encryption</span>
                     </div>
                 </div>

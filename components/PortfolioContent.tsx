@@ -122,20 +122,20 @@ export default function PortfolioContent() {
               <Experience />
               <Education />
               <Projects />
-              <Encryption />
+              <PasswordAnalyzer />
 
               {/* Interactive Zone */}
               <section id="interactive" className="py-20 relative overflow-hidden scroll-mt-20">
                 <div className="container mx-auto px-4 space-y-24 relative z-10">
                   <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-satoshi font-bold">
-                      Interactive <span className="text-cyber-green-dark dark:text-cyber-green font-satoshi font-bold">Terminal</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-satoshi">
+                      Interactive <span className="text-cyber-green-dark dark:text-cyber-green font-satoshi">Terminal</span>
                     </h2>
                     <p className="text-gray-600 dark:text-white mt-2 font-satoshi">Execute commands, simulate attacks, and analyze security.</p>
                   </div>
                   <Terminal />
                   <HackingSim />
-                  <PasswordAnalyzer />
+                  <Encryption />
                 </div>
               </section>
 

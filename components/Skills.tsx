@@ -1,12 +1,14 @@
 import React from 'react';
+import Image from 'next/image';
 
 const SkillImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => (
-  <img
+  <Image
     src={src}
     alt={alt}
+    width={160}
+    height={160}
     className={className}
     loading="lazy"
-    decoding="async"
   />
 );
 

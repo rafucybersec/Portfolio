@@ -1,14 +1,13 @@
 import React from 'react';
+import Image from 'next/image';
 import { ShieldCheck, Activity, Database, Eye } from 'lucide-react';
 const OutlookIcon = ({ size = 20, className = "" }: { size?: number, className?: string }) => (
-  <img
+  <Image
     src="/icons/outlook.png"
     alt="Outlook"
     width={size}
     height={size}
     className={className}
-    loading="lazy"
-    decoding="async"
   />
 );
 

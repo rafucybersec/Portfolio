@@ -55,6 +55,7 @@ function useIconTextures(skills: Skill[]) {
 
   useEffect(() => {
     let cancelled = false;
+    let loadedTextures: (THREE.CanvasTexture | null)[] = [];
 
     const loadIcon = (url: string): Promise<THREE.CanvasTexture | null> =>
       new Promise((resolve) => {
@@ -83,12 +84,15 @@ function useIconTextures(skills: Skill[]) {
 
     const loadAll = async () => {
       const results = await Promise.all(skills.map((s) => loadIcon(s.icon)));
+      loadedTextures = results;
       if (!cancelled) setTextures(results);
     };
 
     loadAll();
     return () => {
       cancelled = true;
+      // Dispose textures to free GPU memory
+      loadedTextures.forEach((tex) => tex?.dispose());
     };
   }, [skills]);
 
