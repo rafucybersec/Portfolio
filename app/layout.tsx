@@ -70,6 +70,13 @@ export const metadata: Metadata = {
     description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response.',
     images: [
       {
+        url: '/og-preview.gif',
+        width: 800,
+        height: 420,
+        alt: '0xRafuSec Portfolio - Animated Preview',
+        type: 'image/gif',
+      },
+      {
         url: '/og-image.png',
         width: 1200,
         height: 630,

@@ -124,20 +124,6 @@ const Hero: React.FC = () => {
 
           {/* LEFT SIDE - Text Content */}
           <div className="flex-1 text-left max-w-2xl">
-            <div
-              ref={badgeRef}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyber-green-dark/30 dark:border-cyber-green/30 bg-cyber-green/5 text-cyber-green-dark dark:text-cyber-green text-sm font-satoshi mb-6 shadow-none dark:shadow-neon-green"
-            >
-              <span className="relative flex h-2.2 w-2.2">
-                <span
-                  className="absolute inline-flex h-full w-full rounded-full bg-cyber-green-dark dark:bg-cyber-green"
-                  style={{ animation: 'badgePulse 1.8s ease-in-out infinite' }}
-                ></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyber-green-dark dark:bg-cyber-green"></span>
-              </span>
-              Available For Hire
-            </div>
-
             <h1 ref={nameRef} className="text-4xl md:text-5xl lg:text-6xl mb-6 tracking-tight text-white font-satoshi font-bold whitespace-nowrap">
               <span className="inline-block">
                 {nameDisplayed.split('').map((char, index) => {
@@ -197,7 +183,7 @@ const Hero: React.FC = () => {
             </div>
 
             <p ref={descRef} className="text-gray-600 dark:text-cyber-green/80 mb-10 leading-relaxed font-satoshi text-xl md:text-base border-t border-b border-gray-200 dark:border-[#00ff9d]/20 py-4 bg-[#00ff9d]/5 dark:bg-[#00ff9d]/5 backdrop-blur-sm">
-              <span className="text-cyber-blue-dark dark:text-cyber-blue">&gt;&gt;</span>{' '}
+              <span className="text-cyber-green-dark dark:text-cyber-green">&gt;&gt;</span>{' '}
               <span className="inline">
                 {descriptionDisplayed}
                 {descriptionDisplayed.length < 175 && (
