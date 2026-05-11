@@ -9,7 +9,6 @@ const Hero: React.FC = () => {
   const [titleDisplayed, setTitleDisplayed] = useState('');
 
   // Refs for GSAP entrance
-  const badgeRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
@@ -90,9 +89,6 @@ const Hero: React.FC = () => {
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.2 });
 
-    if (badgeRef.current) {
-      tl.fromTo(badgeRef.current, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
-    }
     if (nameRef.current) {
       tl.fromTo(nameRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.1");
     }
@@ -113,14 +109,14 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 overflow-hidden" id="home">
+    <section className="relative min-h-screen flex items-center justify-center pt-20 pb-10 overflow-hidden" id="home">
       {/* Subtle radial gradient overlays for hero-specific depth */}
       <div className="absolute inset-0 z-[1] pointer-events-none" />
       <div className="absolute inset-0 z-[1] pointer-events-none" />
 
       {/* Main Hero Content */}
       <div className="w-full px-6 md:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
 
           {/* LEFT SIDE - Text Content */}
           <div className="flex-1 text-left max-w-2xl">
