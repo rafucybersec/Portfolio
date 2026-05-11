@@ -55,3 +55,6 @@ yarn-error.log*
 *.sw?
 .agent/*
 graphify-out/*
+
+# Original uncompressed video
+public/videos/RafayWebsite_original.mp4
