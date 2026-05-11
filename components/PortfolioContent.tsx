@@ -21,7 +21,6 @@ const HackingSim = dynamic(() => import('./HackingSim'))
 const PasswordAnalyzer = dynamic(() => import('./PasswordAnalyzer'))
 const Konami = dynamic(() => import('./Konami'), { ssr: false })
 const BackToTop = dynamic(() => import('./BackToTop'))
-const Encryption = dynamic(() => import('./Encryption'))
 const StarsCanvas = dynamic(() => import('./StarBackground'), { ssr: false })
 const TargetCursor = dynamic(() => import('./TargetCursor'), { ssr: false })
 
@@ -137,7 +136,6 @@ export default function PortfolioContent() {
                   </div>
                   <Terminal />
                   <HackingSim />
-                  <Encryption />
                 </div>
               </section>
 
