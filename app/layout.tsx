@@ -70,34 +70,26 @@ export const metadata: Metadata = {
     description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response.',
     images: [
       {
+        url: '/og-preview.gif',
+        width: 800,
+        height: 420,
+        alt: '0xRafuSec Portfolio - Animated Preview',
+        type: 'image/gif',
+      },
+      {
         url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: '0xRafuSec Portfolio',
       },
     ],
-    videos: [
-      {
-        url: 'https://rafucybersec.vercel.app/videos/RafayWebsite.mp4',
-        secureUrl: 'https://rafucybersec.vercel.app/videos/RafayWebsite.mp4',
-        type: 'video/mp4',
-        width: 1280,
-        height: 720,
-      },
-    ],
   },
   twitter: {
-    card: 'player',
+    card: 'summary_large_image',
     title: '0xRafuSec | Cyber Security Engineer',
     description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, and threat detection.',
     creator: '@rafucybersec',
-    images: ['/og-image.png'],
-    players: {
-      playerUrl: 'https://rafucybersec.vercel.app/api/video-player',
-      streamUrl: 'https://rafucybersec.vercel.app/videos/RafayWebsite.mp4',
-      width: 1280,
-      height: 720,
-    },
+    images: ['/og-preview.gif'],
   },
   robots: {
     index: true,
@@ -139,12 +131,6 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        {/* Twitter Player Card meta tags */}
-        <meta name="twitter:player" content="https://rafucybersec.vercel.app/api/video-player" />
-        <meta name="twitter:player:width" content="1280" />
-        <meta name="twitter:player:height" content="720" />
-        <meta name="twitter:player:stream" content="https://rafucybersec.vercel.app/videos/RafayWebsite.mp4" />
-        <meta name="twitter:player:stream:content_type" content="video/mp4" />
       </head>
       <body className="font-sans" suppressHydrationWarning>
         <Providers>
