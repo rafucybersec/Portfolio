@@ -5,14 +5,6 @@ import { ExternalLink, Shield, Search, Code, Lock } from 'lucide-react';
 const projectsData: Project[] = [
   {
     id: 1,
-    title: "NoxShield — SIEM Dashboard",
-    description: "Built a full-featured security operations dashboard inspired by Wazuh. Features real-time threat monitoring with live Wazuh API integration, interactive geolocation attack maps, MITRE ATT&CK-mapped alert visualization, compliance framework tracking (PCI-DSS, HIPAA, NIST), file integrity monitoring, and vulnerability management — all backed by SQLite with auto-refreshing data pipelines.",
-    category: "security",
-    tags: ["Next.js", "TypeScript", "Wazuh API", "Recharts", "SQLite", "Zustand", "MITRE ATT&CK", "React Simple Maps", "Tailwind CSS"],
-    links: { github: "https://github.com/0xRafuSec/NoxShield" }
-  },
-  {
-    id: 2,
     title: "Active Directory Attack Simulation & Hardening",
     description: "Emulated post-exploitation techniques in a Windows AD lab using Atomic Red Team, PowerShell, and Mimikatz. Integrated Wazuh SIEM to alert on 20+ MITRE-mapped TTPs and performed CIS-based hardening, achieving 80% increase in compliance.",
     category: "security",
@@ -20,12 +12,20 @@ const projectsData: Project[] = [
     links: { github: "https://github.com/0xRafuSec/Active-Directory-Attack-Simulation-and-Hardening-Lab" }
   },
   {
-    id: 3,
-    title: "0xRafuSec — Cyber Security Portfolio",
-    description: "A premium cybersecurity-themed portfolio featuring an interactive hacking terminal, GSAP-powered animations, 3D skills globe, password strength analyzer, Konami code easter egg, and a custom target cursor — built with performance-first architecture and deployed on Vercel with optimized OG previews.",
+    id: 2,
+    title: "0xRafuSec Portfolio",
+    description: "A premium cybersecurity-themed portfolio featuring an interactive hacking terminal, GSAP-powered animations, 3D skills globe, password strength analyzer, Konami code easter egg, and a custom target cursor built with performance-first architecture and deployed on Vercel with optimized OG previews.",
     category: "development",
     tags: ["Next.js 14", "TypeScript", "GSAP", "Tailwind CSS", "Framer Motion", "Three.js", "Vercel"],
     links: { github: "https://github.com/0xRafuSec/rafu-portfolio", demo: "https://rafucybersec.vercel.app" }
+  },
+  {
+    id: 3,
+    title: "NoxShield SIEM",
+    description: "Built a full-featured security operations dashboard inspired by Wazuh. Features real-time threat monitoring with live Wazuh API integration, interactive geolocation attack maps, MITRE ATT&CK-mapped alert visualization, compliance framework tracking (PCI-DSS, HIPAA, NIST), file integrity monitoring, and vulnerability management all backed by SQLite with auto-refreshing data pipelines.",
+    category: "security",
+    tags: ["Next.js", "TypeScript", "Wazuh API", "Recharts", "SQLite", "Zustand", "MITRE ATT&CK", "React Simple Maps", "Tailwind CSS"],
+    links: { github: "https://github.com/0xRafuSec/NoxShield" }
   },
   {
     id: 4,
