@@ -1,0 +1,53 @@
+# Muhammad Rafay Ali - Cyber Security Engineer Portfolio
+
+> Personal portfolio website for Muhammad Rafay Ali, a Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response.
+
+## About
+
+Muhammad Rafay Ali is a Cyber Security Engineer with 2+ years of hands-on experience in SOC operations, SIEM engineering, threat detection, incident response, and security hardening. He has deployed and tuned security platforms across multi-server enterprise environments, cutting undetected threat windows by 35% and false positive rates by 45%.
+
+## Core Specializations
+
+- SOC Operations & Real-time Threat Monitoring
+- SIEM Engineering (Wazuh, IBM QRadar, Threat Hawk, Microsoft Sentinel)
+- Threat Detection & Incident Response
+- ISO 27001, NCA-ECC, CIS Benchmarks, MITRE ATT&CK
+- Vulnerability Assessment & Penetration Testing
+- Security Hardening & Compliance Automation
+
+## Professional Experience
+
+- Cyber Security Engineer at Encbit (Jul 2025 – Present)
+- Cyber Security Analyst at Cyber Silo (Feb 2025 – Jul 2025)
+- SOC Analyst at Cyber Silo / AIOU (Feb 2024 – Feb 2025)
+
+## Certifications
+
+- ISO/IEC 27001:2022 Lead Auditor – MasterMind
+- Certified SOC Analyst Foundation – SIEM XPERT
+- ISO/IEC 27001:2022 Information Security Associate – SKILLFRONT
+- Cybersecurity Specialization – Google
+- Security Analyst Fundamentals – IBM
+- Certified in Cybersecurity (CC) – ISC2
+- Ethical Hacking & Penetration Testing – Udemy
+- Linux 100 – TCM Security
+- Active Lab Profile – TryHackMe
+
+## Featured Projects
+
+- Active Directory Attack Simulation & Hardening
+- rafucybersec Portfolio (Next.js, TypeScript, GSAP, Three.js)
+- NoxShield SIEM Dashboard
+- Multi-Sensor Intrusion Detection IoT
+
+## Education
+
+- Bachelor of Science in Computer Science – Hamdard University (2019–2023)
+
+## Contact
+
+- Email: muhammad.rafayali@outlook.com
+- LinkedIn: https://linkedin.com/in/muhammadrafayali/
+- GitHub: https://github.com/rafucybersec
+- Location: Islamabad, Pakistan
+- Website: https://rafucybersec.vercel.app

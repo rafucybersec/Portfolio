@@ -1,18 +1,17 @@
-const structuredData = {
+const personData = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Muhammad Rafay Ali',
-  alternateName: '0xRafuSec',
   jobTitle: 'Cyber Security Engineer',
   description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response.',
   url: 'https://rafucybersec.vercel.app',
   image: 'https://rafucybersec.vercel.app/rafu.png',
   sameAs: [
-    'https://github.com/0xRafuSec',
+    'https://github.com/rafucybersec',
     'https://www.linkedin.com/in/muhammadrafayali/',
     'https://www.instagram.com/rafucybersec/',
   ],
-  email: 'rafay.arshad1@outlook.com',
+  email: 'muhammad.rafayali@outlook.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Islamabad',
@@ -20,7 +19,7 @@ const structuredData = {
   },
   alumniOf: {
     '@type': 'CollegeOrUniversity',
-    name: 'University of Engineering and Technology',
+    name: 'Hamdard University',
   },
   knowsAbout: [
     'Cyber Security',
@@ -57,11 +56,63 @@ const structuredData = {
   ],
 }
 
+const breadcrumbData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://rafucybersec.vercel.app',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Projects',
+      item: 'https://rafucybersec.vercel.app/#projects',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Experience',
+      item: 'https://rafucybersec.vercel.app/#experience',
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: 'Contact',
+      item: 'https://rafucybersec.vercel.app/#contact',
+    },
+  ],
+}
+
+const websiteData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Muhammad Rafay Ali Portfolio',
+  url: 'https://rafucybersec.vercel.app',
+  author: {
+    '@type': 'Person',
+    name: 'Muhammad Rafay Ali',
+  },
+}
+
 export default function StructuredData() {
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
+      />
+    </>
   )
 }

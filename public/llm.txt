@@ -1,0 +1,8 @@
+# Muhammad Rafay Ali
+
+Cyber Security Engineer portfolio. Specializes in SOC operations, SIEM engineering (Wazuh, QRadar, Sentinel), threat detection, incident response, and compliance frameworks (ISO 27001, MITRE ATT&CK, NCA-ECC, CIS). 2+ years experience. Based in Islamabad, Pakistan.
+
+Contact: muhammad.rafayali@outlook.com
+Website: https://rafucybersec.vercel.app
+GitHub: https://github.com/rafucybersec
+LinkedIn: https://linkedin.com/in/muhammadrafayali/

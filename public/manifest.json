@@ -1,0 +1,25 @@
+{
+  "name": "Muhammad Rafay Ali | Cyber Security Engineer",
+  "short_name": "Rafay Ali",
+  "description": "Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030014",
+  "theme_color": "#00ff9d",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "cybersecurity", "technology"]
+}

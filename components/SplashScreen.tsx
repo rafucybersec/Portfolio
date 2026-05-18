@@ -10,13 +10,13 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const bootSequence = [
-    { text: "Initializing kernel...", delay: 50 },
-    { text: "Loading security modules [OK]", delay: 200 },
-    { text: "Verifying encrypted handshake...", delay: 350 },
-    { text: "Bypassing firewall...", delay: 500 },
-    { text: "Mounting virtual file system...", delay: 650 },
-    { text: "Establishing secure tunnel...", delay: 800 },
-    { text: "ACCESS GRANTED!", delay: 1000 },
+    { text: "Initializing kernel...", delay: 0 },
+    { text: "Loading security modules [OK]", delay: 120 },
+    { text: "Verifying encrypted handshake...", delay: 240 },
+    { text: "Bypassing firewall...", delay: 380 },
+    { text: "Mounting virtual file system...", delay: 500 },
+    { text: "Establishing secure tunnel...", delay: 640 },
+    { text: "ACCESS GRANTED!", delay: 800 },
   ];
 
   // Matrix Rain Effect
@@ -87,25 +87,27 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           if (charIndex >= text.length) {
             clearInterval(typingInterval);
           }
-        }, 20); // Fast typing: 20ms per character
+        }, 12); // Faster typing: 12ms per character
         
         typingIntervals.push(typingInterval);
       }, delay);
     });
 
+    // Progress bar completes in sync with boot sequence
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 12; // Faster progress
+        return prev + 10;
       });
-    }, 40);
+    }, 80);
 
+    // Complete after full animation finishes (last line at 800ms + typing time ~350ms + 50ms buffer)
     timeoutId = setTimeout(() => {
       onComplete();
-    }, 1800); // Fast boot for better LCP
+    }, 1200);
 
     return () => {
       clearTimeout(timeoutId);

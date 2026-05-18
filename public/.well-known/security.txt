@@ -1,0 +1,7 @@
+# Security Policy for rafucybersec.vercel.app
+# https://securitytxt.org/
+
+Contact: mailto:muhammad.rafayali@outlook.com
+Preferred-Languages: en
+Canonical: https://rafucybersec.vercel.app/.well-known/security.txt
+Expires: 2027-12-31T23:59:59.000Z

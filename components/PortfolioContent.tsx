@@ -11,18 +11,19 @@ import Skills from './Skills'
 import Certifications from './Certifications'
 import Experience from './Experience'
 import Education from './Education'
+import Insights from './Insights'
 import Projects from './Projects'
 import Contact from './Contact'
 import Footer from './Footer'
 import SplashScreen from './SplashScreen'
 
 const Terminal = dynamic(() => import('./Terminal'))
-const HackingSim = dynamic(() => import('./HackingSim'))
+
 const PasswordAnalyzer = dynamic(() => import('./PasswordAnalyzer'))
 const Konami = dynamic(() => import('./Konami'), { ssr: false })
 const BackToTop = dynamic(() => import('./BackToTop'))
 const StarsCanvas = dynamic(() => import('./StarBackground'), { ssr: false })
-const TargetCursor = dynamic(() => import('./TargetCursor'), { ssr: false })
+const CyberDotCursor = dynamic(() => import('./CyberDotCursor'), { ssr: false })
 
 export default function PortfolioContent() {
   const [loading, setLoading] = useState(true)
@@ -43,6 +44,9 @@ export default function PortfolioContent() {
         const sections = mainRef.current!.querySelectorAll('section')
 
         sections.forEach((section) => {
+          // Skip projects section - it has its own ScrollTrigger pin
+          if (section.id === 'projects') return
+
           // Animate section heading
           const heading = section.querySelector('h2')
           if (heading) {
@@ -106,7 +110,7 @@ export default function PortfolioContent() {
         {!loading && (
           <>
             <Konami />
-            <TargetCursor />
+            <CyberDotCursor />
 
             {/* Global Backgrounds - Space Theme with GREEN tint */}
             <div className="fixed inset-0 z-0 bg-gradient-to-b from-[#020a05] via-[#030a06] to-[#020a04]"></div>
@@ -118,24 +122,24 @@ export default function PortfolioContent() {
             <main id="main-content" ref={mainRef} className="relative z-20">
               <Hero />
               <About />
-              <Skills />
-              <Certifications />
               <Experience />
               <Education />
+              <Skills />
+              <Certifications />
               <Projects />
+              <Insights />
               <PasswordAnalyzer />
 
-              {/* Interactive Zone */}
+              {/* Interactive Terminal */}
               <section id="interactive" className="py-20 relative overflow-hidden scroll-mt-20">
-                <div className="container mx-auto px-4 space-y-24 relative z-10">
-                  <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-satoshi">
-                      Interactive <span className="text-cyber-green-dark dark:text-cyber-green font-satoshi">Terminal</span>
-                    </h2>
-                    <p className="text-gray-600 dark:text-white mt-2 font-satoshi">Execute commands, simulate attacks, and analyze security.</p>
+                <div className="container mx-auto px-4 relative z-10">
+                  <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-white font-satoshi">
+                    Interactive <span className="text-cyber-green">Terminal</span>
+                  </h2>
+                  <p className="text-white text-center mb-8 font-satoshi text-sm">Try commands like <code className="text-cyber-green bg-white/5 px-1.5 py-0.5 rounded">help</code>, <code className="text-cyber-green bg-white/5 px-1.5 py-0.5 rounded">whoami</code>, or <code className="text-cyber-green bg-white/5 px-1.5 py-0.5 rounded">skills</code></p>
+                  <div className="max-w-3xl mx-auto">
+                    <Terminal />
                   </div>
-                  <Terminal />
-                  <HackingSim />
                 </div>
               </section>
 

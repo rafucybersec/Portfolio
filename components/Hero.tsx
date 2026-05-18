@@ -13,7 +13,6 @@ const Hero: React.FC = () => {
   const subtitleRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-  const socialsRef = useRef<HTMLDivElement>(null);
 
   // Cool animated reveal for name (letter by letter with fade-in and scale)
   useEffect(() => {
@@ -100,9 +99,6 @@ const Hero: React.FC = () => {
     }
     if (buttonsRef.current) {
       tl.fromTo(buttonsRef.current.children, { opacity: 0, y: 15 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.4, ease: "power2.out" }, "-=0.2");
-    }
-    if (socialsRef.current) {
-      tl.fromTo(socialsRef.current.children, { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.3, ease: "power2.out" }, "-=0.1");
     }
 
     return () => { tl.kill(); };
@@ -234,110 +230,12 @@ const Hero: React.FC = () => {
                 <div className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-cyber-blue-dark/10 dark:via-cyber-blue/20 to-transparent group-hover:animate-shimmer skew-x-[10deg]"></div>
                 <span className="skew-x-[10deg] flex items-center gap-2 relative z-10">
                   <Download size={18} />
-                  Download CV
+                  View Resume
                 </span>
               </a>
             </div>
 
-            {/* ── Social Icons ── */}
-            <div ref={socialsRef} className="flex justify-center lg:justify-start gap-6">
 
-              {/* GitHub fill-based SVG, color via CSS filter */}
-              <a
-                href="https://github.com/0xRafuSec"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit GitHub profile (opens in new tab)"
-                className="group transition-all duration-300 hover:scale-125 hover:rotate-[360deg] focus:outline-none focus:ring-2 focus:ring-[#00D080] rounded"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  aria-hidden="true"
-                  className="opacity-70 group-hover:opacity-100 transition-all duration-300 hover:scale-[1.2] hover:rotate-[360deg]"
-                  style={{ fill: '#00D080', filter: 'none' }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as SVGElement).style.filter = 'drop-shadow(0 0 5px #00D080)';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as SVGElement).style.filter = 'none';
-                  }}
-                >
-                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-              </a>
-
-              {/* LinkedIn stroke-based SVG, color via currentColor on the SVG element */}
-              <a
-                href="https://linkedin.com/in/muhammadrafayali/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit LinkedIn profile (opens in new tab)"
-                className="group transition-all duration-300 hover:scale-125 hover:rotate-[360deg] focus:outline-none focus:ring-2 focus:ring-[#0A66C2] rounded"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#00D080"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="opacity-70 group-hover:opacity-100 transition-all duration-300 hover:scale-[1.2] hover:rotate-[360deg]"
-                  onMouseEnter={e => {
-                    (e.currentTarget as SVGElement).style.filter = 'drop-shadow(0 0 5px #00D080)';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as SVGElement).style.filter = 'none';
-                  }}
-                >
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                  <rect width="4" height="12" x="2" y="9" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </a>
-
-              {/* Instagram stroke-based SVG, color via explicit stroke */}
-              <a
-                href="https://instagram.com/rafucybersec/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit Instagram profile (opens in new tab)"
-                className="group transition-all duration-300 hover:scale-125 hover:rotate-[360deg] focus:outline-none focus:ring-2 focus:ring-[#E1306C] rounded"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#00D080"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="opacity-70 group-hover:opacity-100 transition-all duration-300 hover:scale-[1.2] hover:rotate-[360deg]"
-                  onMouseEnter={e => {
-                    (e.currentTarget as SVGElement).style.filter = 'drop-shadow(0 0 5px #00D080)';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as SVGElement).style.filter = 'none';
-                  }}
-                >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                </svg>
-              </a>
-
-            </div>
-            {/* ── End Social Icons ── */}
 
           </div>
           {/* END LEFT SIDE */}

@@ -10,7 +10,8 @@ const Contact: React.FC = () => {
   const blockedEmails = [
     'rafay.arshad1@outlook.com',
     'rafay.arshad1@gmail.com',
-    'muhammad.rafayali@outlook.com'
+    'muhammad.rafayali@outlook.com',
+    'muhammad.rafayali@gmail.com'
   ];
 
   const validateEmail = (email: string): boolean => {
@@ -185,7 +186,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="flex gap-4">
-              <a href="https://github.com/0xRafuSec" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile" className="w-10 h-10 border border-gray-300 dark:border-white/10 rounded-full flex items-center justify-center hover:bg-cyber-green-dark dark:hover:bg-cyber-green hover:border-cyber-green-dark dark:hover:border-cyber-green transition-all duration-500 hover:scale-[1.2] hover:rotate-[360deg]">
+              <a href="https://github.com/rafucybersec" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile" className="w-10 h-10 border border-gray-300 dark:border-white/10 rounded-full flex items-center justify-center hover:bg-cyber-green-dark dark:hover:bg-cyber-green hover:border-cyber-green-dark dark:hover:border-cyber-green transition-all duration-500 hover:scale-[1.2] hover:rotate-[360deg]">
                 <img src="/icons/github_ico.svg" alt="GitHub" width={18} height={18} style={{ filter: 'brightness(0) invert(1)' }} />
               </a>
               <a href="https://linkedin.com/in/muhammadrafayali/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile" className="w-10 h-10 border border-gray-300 dark:border-white/10 rounded-full flex items-center justify-center hover:bg-cyber-blue-dark dark:hover:bg-cyber-blue hover:border-cyber-blue-dark dark:hover:border-cyber-blue transition-all duration-500 hover:scale-[1.2] hover:rotate-[360deg]">
@@ -201,7 +202,7 @@ const Contact: React.FC = () => {
           <form ref={formRef} onSubmit={handleSubmit} className="bg-white/80 dark:bg-[#00ff9d]/5 backdrop-blur-md p-8 rounded-2xl border border-gray-200 dark:border-[#00ff9d]/20 shadow-xl">
             <div className="space-y-4 font-satoshi">
               <div>
-                <label htmlFor="contact-name" className="block text-sm font-medium text-white dark:text-cyber-green mb-1">Your Name</label>
+                <label htmlFor="contact-name" className="block text-sm font-medium text-white dark:text-cyber-green mb-1">Name</label>
                 <input
                   required
                   id="contact-name"
@@ -213,7 +214,7 @@ const Contact: React.FC = () => {
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 dark:text-cyber-green mb-1">Your Email</label>
+                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 dark:text-cyber-green mb-1">Email Address</label>
                 <input
                   required
                   id="contact-email"

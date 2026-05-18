@@ -7,9 +7,10 @@ import { gsap } from "gsap";
 /**
  * Warp Speed Hyperspace Background
  * 
- * Raw Three.js implementation WebGLRenderer, BufferGeometry, Points.
- * Two particle layers: primary stars + dim depth layer.
- * GSAP tweens the speed for warp-in ramp and mouse parallax.
+ * Raw Three.js: WebGLRenderer, BufferGeometry, Points + LineSegments.
+ * - Circular particle texture (canvas-generated, no image)
+ * - Speed-proportional streak trails behind each star
+ * - GSAP tweens speed for warp-in ramp + mouse parallax
  * 
  * Mounted globally in PortfolioContent.tsx, position: fixed, z-index: 0.
  */
@@ -21,7 +22,30 @@ const isLowEnd =
     : false;
 
 const STAR_COUNT = isLowEnd ? 700 : 1500;
-const MAX_SPEED = isLowEnd ? 12 : 18;
+const MAX_SPEED = isLowEnd ? 8 : 13;
+
+/** Create a soft circular glow texture via Canvas 2D */
+function createCircleTexture(): THREE.CanvasTexture {
+  const size = 64;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d")!;
+  const half = size / 2;
+  const gradient = ctx.createRadialGradient(half, half, 0, half, half, half);
+  gradient.addColorStop(0, "rgba(0, 255, 157, 1)");
+  gradient.addColorStop(0.15, "rgba(0, 255, 157, 0.9)");
+  gradient.addColorStop(0.4, "rgba(0, 255, 157, 0.4)");
+  gradient.addColorStop(0.7, "rgba(0, 255, 157, 0.1)");
+  gradient.addColorStop(1, "rgba(0, 255, 157, 0)");
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(half, half, half, 0, Math.PI * 2);
+  ctx.fill();
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.needsUpdate = true;
+  return tex;
+}
 
 export default function WarpSpeedBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +55,7 @@ export default function WarpSpeedBackground() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // ─── Scene ───
+    // Scene
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -42,7 +66,7 @@ export default function WarpSpeedBackground() {
     camera.position.set(0, 0, 0);
     camera.lookAt(0, 0, -1);
 
-    // ─── Renderer ───
+    // Renderer
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: !isLowEnd,
@@ -54,68 +78,64 @@ export default function WarpSpeedBackground() {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // ─── Star Geometry (primary layer) ───
+    // Circular texture for round stars
+    const circleTexture = createCircleTexture();
+
+    // Star Geometry (primary layer)
     const positions = new Float32Array(STAR_COUNT * 3);
     for (let i = 0; i < STAR_COUNT; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 1600;     // x: -800 to 800
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 1200;  // y: -600 to 600
-      positions[i * 3 + 2] = Math.random() * -2000;          // z: -2000 to 0
+      positions[i * 3] = (Math.random() - 0.5) * 1600;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 1200;
+      positions[i * 3 + 2] = Math.random() * -2000;
     }
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({
-      color: 0x00ff88,
-      size: 0.8,
+      color: 0x00ff9d,
+      size: 1.2,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.9,
       sizeAttenuation: true,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
+      map: circleTexture,
     });
 
     const stars = new THREE.Points(geometry, material);
     scene.add(stars);
 
-    // ─── Depth layer (streak trail effect) ───
-    const depthPositions = new Float32Array(STAR_COUNT * 3);
-    for (let i = 0; i < STAR_COUNT; i++) {
-      depthPositions[i * 3] = positions[i * 3];
-      depthPositions[i * 3 + 1] = positions[i * 3 + 1];
-      depthPositions[i * 3 + 2] = positions[i * 3 + 2] - 2;
-    }
-
-    const depthGeometry = new THREE.BufferGeometry();
-    depthGeometry.setAttribute(
+    // Streak trail geometry (LineSegments: 2 vertices per star)
+    const trailPositions = new Float32Array(STAR_COUNT * 6);
+    const trailGeometry = new THREE.BufferGeometry();
+    trailGeometry.setAttribute(
       "position",
-      new THREE.BufferAttribute(depthPositions, 3)
+      new THREE.BufferAttribute(trailPositions, 3)
     );
 
-    const depthMaterial = new THREE.PointsMaterial({
-      color: 0x00ff88,
-      size: 0.3,
+    const trailMaterial = new THREE.LineBasicMaterial({
+      color: 0x00ff9d,
       transparent: true,
-      opacity: 0.3,
-      sizeAttenuation: true,
+      opacity: 0.15,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
 
-    const depthStars = new THREE.Points(depthGeometry, depthMaterial);
-    scene.add(depthStars);
+    const trails = new THREE.LineSegments(trailGeometry, trailMaterial);
+    scene.add(trails);
 
-    // ─── State for GSAP tweening ───
-    const state = { speed: 3 };
+    // State for GSAP tweening
+    const state = { speed: 2 };
 
     // Warp ramp-in
     gsap.to(state, {
       speed: MAX_SPEED,
-      duration: 2,
+      duration: 3,
       ease: "power2.in",
     });
 
-    // ─── Mouse parallax ───
+    // Mouse parallax
     const mouse = { x: 0, y: 0 };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -133,7 +153,7 @@ export default function WarpSpeedBackground() {
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-    // ─── Resize handler ───
+    // Resize handler
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -142,48 +162,66 @@ export default function WarpSpeedBackground() {
 
     window.addEventListener("resize", onResize);
 
-    // ─── Animation loop ───
+    // Animation loop
     const posAttr = geometry.attributes.position as THREE.BufferAttribute;
-    const depthAttr = depthGeometry.attributes
-      .position as THREE.BufferAttribute;
+    const trailAttr = trailGeometry.attributes.position as THREE.BufferAttribute;
 
     const animate = () => {
       frameRef.current = requestAnimationFrame(animate);
 
       const arr = posAttr.array as Float32Array;
-      const dArr = depthAttr.array as Float32Array;
+      const tArr = trailAttr.array as Float32Array;
+      const speedFactor = state.speed;
+      // Trail length scales with speed (longer trail = faster)
+      const trailLen = speedFactor * 2.5;
 
       for (let i = 0; i < STAR_COUNT; i++) {
+        const xi = i * 3;
+        const yi = i * 3 + 1;
         const zi = i * 3 + 2;
 
-        // Move stars forward
-        arr[zi] += state.speed;
-        dArr[zi] += state.speed;
+        // Move stars forward (toward camera)
+        arr[zi] += speedFactor;
+
+        // Trail: front vertex = star position, back vertex = behind the star
+        const ti = i * 6;
+        tArr[ti] = arr[xi];
+        tArr[ti + 1] = arr[yi];
+        tArr[ti + 2] = arr[zi];
+        tArr[ti + 3] = arr[xi];
+        tArr[ti + 4] = arr[yi];
+        tArr[ti + 5] = arr[zi] - trailLen;
 
         // Reset star when it passes the camera
         if (arr[zi] > 100) {
           arr[zi] = -2000;
-          arr[i * 3] = (Math.random() - 0.5) * 1600;
-          arr[i * 3 + 1] = (Math.random() - 0.5) * 1200;
+          arr[xi] = (Math.random() - 0.5) * 1600;
+          arr[yi] = (Math.random() - 0.5) * 1200;
 
-          dArr[zi] = arr[zi] - 2;
-          dArr[i * 3] = arr[i * 3];
-          dArr[i * 3 + 1] = arr[i * 3 + 1];
+          // Reset trail too
+          tArr[ti] = arr[xi];
+          tArr[ti + 1] = arr[yi];
+          tArr[ti + 2] = arr[zi];
+          tArr[ti + 3] = arr[xi];
+          tArr[ti + 4] = arr[yi];
+          tArr[ti + 5] = arr[zi];
         }
       }
 
       posAttr.needsUpdate = true;
-      depthAttr.needsUpdate = true;
+      trailAttr.needsUpdate = true;
 
-      // Scale star size with speed (streak effect)
-      material.size = 0.8 + (state.speed / MAX_SPEED) * 2.5;
+      // Scale star size with speed
+      material.size = 1.2 + (speedFactor / MAX_SPEED) * 2.5;
+      // Trail opacity scales with speed
+      trailMaterial.opacity = 0.05 + (speedFactor / MAX_SPEED) * 0.25;
 
       renderer.render(scene, camera);
     };
 
     frameRef.current = requestAnimationFrame(animate);
 
-    // ─── Cleanup ───
+    // Cleanup
     return () => {
       cancelAnimationFrame(frameRef.current);
       window.removeEventListener("mousemove", onMouseMove);
@@ -191,8 +229,9 @@ export default function WarpSpeedBackground() {
       renderer.dispose();
       geometry.dispose();
       material.dispose();
-      depthGeometry.dispose();
-      depthMaterial.dispose();
+      trailGeometry.dispose();
+      trailMaterial.dispose();
+      circleTexture.dispose();
       if (renderer.domElement.parentNode) {
         renderer.domElement.parentNode.removeChild(renderer.domElement);
       }

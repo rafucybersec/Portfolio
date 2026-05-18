@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
     // Check if email is blocked
     if (isEmailBlocked(trimmedEmail)) {
       return NextResponse.json(
-        { error: 'This email address cannot be used for contact form submissions.' },
+        { error: 'Please use your own email address to get in touch.' },
         { status: 403 }
       );
     }
@@ -245,10 +245,10 @@ export async function POST(request: NextRequest) {
     
     try {
       const { data, error } = await resend.emails.send({
-        from: '0xRafuSec <onboarding@resend.dev>', // Test email - verify your domain in Resend for production
+        from: 'rafucybersec <onboarding@resend.dev>', // Test email - verify your domain in Resend for production
         to: ['rafay.arshad1@gmail.com'],
         replyTo: trimmedEmail, // So you can reply directly to the sender
-        subject: `[0xRafuSec] New Contact: ${safeName}`,
+        subject: `[rafucybersec] New Contact: ${safeName}`,
         html: `
 <!DOCTYPE html>
 <html>
@@ -272,7 +272,7 @@ export async function POST(request: NextRequest) {
                 </div>
                 <div style="color: #00ff9d; font-size: 14px; letter-spacing: 3px;">╚════════════════════════════════════╝</div>
                 <div style="color: #666; font-size: 11px; margin-top: 15px; font-family: monospace;">
-                  [0xRafuSec] Portfolio Contact System
+                  [rafucybersec] Portfolio Contact System
                 </div>
               </div>
             </td>
@@ -323,7 +323,7 @@ export async function POST(request: NextRequest) {
             <td style="background-color: #0a0a0a; padding: 20px; border-top: 1px solid #1a1a1a; text-align: center;">
               <div style="color: #666; font-size: 10px; line-height: 1.6;">
                 <div style="margin-bottom: 5px;">
-                  <span style="color: #00ff9d;">[0xRafuSec]</span> Cyber Security Engineer
+                  <span style="color: #00ff9d;">[rafucybersec]</span> Cyber Security Engineer
                 </div>
                 <div style="color: #444; font-size: 9px;">
                   This message was sent from the portfolio contact form.<br>

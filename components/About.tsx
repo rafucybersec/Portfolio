@@ -57,11 +57,11 @@ const About: React.FC = () => {
               </a>
 
               {/* GitHub Button */}
-              <a href="https://github.com/0xRafuSec" target="_blank" aria-label="Visit GitHub profile" className="flex items-center gap-2 group bg-white dark:bg-white/5 border border-white dark:border-white/10 rounded-full pl-2 pr-4 py-1.5 hover:bg-white dark:hover:bg-white/10 transition-all w-10 hover:w-auto overflow-hidden whitespace-nowrap">
+              <a href="https://github.com/rafucybersec" target="_blank" aria-label="Visit GitHub profile" className="flex items-center gap-2 group bg-white dark:bg-white/5 border border-white dark:border-white/10 rounded-full pl-2 pr-4 py-1.5 hover:bg-white dark:hover:bg-white/10 transition-all w-10 hover:w-auto overflow-hidden whitespace-nowrap">
                 <div className="min-w-[24px] flex justify-center text-white dark:text-white">
                   <img src="/icons/github_ico.svg" alt="GitHub" width={20} height={20} style={{ filter: 'brightness(0) invert(1)' }} />
                 </div>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-satoshi text-white dark:text-white">0xRafuSec</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-satoshi text-white dark:text-white">rafucybersec</span>
               </a>
 
               {/* LinkedIn Button */}

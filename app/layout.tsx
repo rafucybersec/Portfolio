@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Cedarville_Cursive, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './globals.css'
-import NoZoomScript from './components/NoZoomScript'
 import ErrorBoundary from './components/ErrorBoundary'
 import StructuredData from './components/StructuredData'
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -32,8 +31,8 @@ const cedarvilleCursive = Cedarville_Cursive({
 export const metadata: Metadata = {
   metadataBase: new URL('https://rafucybersec.vercel.app'),
   title: {
-    default: '0xRafuSec | Cyber Security Engineer',
-    template: '%s | 0xRafuSec',
+    default: 'Muhammad Rafay Ali | Cyber Security Engineer',
+    template: '%s | Muhammad Rafay Ali',
   },
   description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response. Explore my portfolio, projects, and cybersecurity expertise.',
   keywords: [
@@ -48,6 +47,7 @@ export const metadata: Metadata = {
     'MITRE ATT&CK',
     'Wazuh',
     'Threat Hawk',
+    'Muhammad Rafay Ali',
   ],
   authors: [{ name: 'Muhammad Rafay Ali', url: 'https://rafucybersec.vercel.app' }],
   creator: 'Muhammad Rafay Ali',
@@ -59,34 +59,28 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    apple: '/apple-touch-icon.png',
   },
+  manifest: '/manifest.json',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://rafucybersec.vercel.app',
-    siteName: '0xRafuSec Portfolio',
-    title: '0xRafuSec | Cyber Security Engineer',
+    siteName: 'Muhammad Rafay Ali Portfolio',
+    title: 'Muhammad Rafay Ali | Cyber Security Engineer',
     description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response.',
     images: [
-      {
-        url: '/og-preview.gif',
-        width: 800,
-        height: 420,
-        alt: '0xRafuSec Portfolio - Animated Preview',
-        type: 'image/gif',
-      },
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: '0xRafuSec Portfolio',
+        alt: 'Muhammad Rafay Ali - Cyber Security Engineer Portfolio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '0xRafuSec | Cyber Security Engineer',
+    title: 'Muhammad Rafay Ali | Cyber Security Engineer',
     description: 'Cyber Security Engineer specializing in SOC operations, SIEM engineering, and threat detection.',
     creator: '@rafucybersec',
     images: ['/og-image.png'],
@@ -124,6 +118,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth dark ${spaceGrotesk.variable} ${jetBrainsMono.variable} ${cedarvilleCursive.variable}`} suppressHydrationWarning>
       <head>
+        <link rel="canonical" href="https://rafucybersec.vercel.app/" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
+        <meta name="author" content="Muhammad Rafay Ali" />
         <link
           rel="preload"
           href="/fonts/Satoshi-Variable.woff2"
@@ -135,7 +134,6 @@ export default function RootLayout({
       <body className="font-sans" suppressHydrationWarning>
         <Providers>
         <StructuredData />
-        <NoZoomScript />
         <ErrorBoundary>
           <a 
             href="#main-content" 

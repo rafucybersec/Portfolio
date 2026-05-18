@@ -223,6 +223,54 @@ const Terminal: React.FC = () => {
         setHistory([{ type: 'output', content: "Terminal cleared." }]);
         break;
 
+      // ─── Hidden CTF Easter Eggs (not in help) ───
+
+      case 'flag':
+        addToHistory({ type: 'success', content: `🏴 CTF{r4fuc4n_y0u_f1nd_th3m_4ll}` });
+        addToHistory({ type: 'output', content: `Hint: There are 4 more hidden commands. Keep digging.` });
+        break;
+
+      case 'sudo':
+        setIsProcessing(true);
+        addToHistory({ type: 'output', content: `[sudo] password for guest: ` });
+        setTimeout(() => {
+          addToHistory({ type: 'error', content: `guest is not in the sudoers file. This incident has been reported.` });
+          addToHistory({ type: 'success', content: `🏴 CTF{n1c3_try_but_n0_r00t_4_u}` });
+          setIsProcessing(false);
+          setTimeout(() => inputRef.current?.focus(), 10);
+        }, 1500);
+        break;
+
+      case 'nmap':
+        if (target === 'localhost' || target === '127.0.0.1') {
+          setIsProcessing(true);
+          addToHistory({ type: 'output', content: `Starting Nmap 7.94 ( https://nmap.org )` });
+          setTimeout(() => {
+            addToHistory({ type: 'output', content: `Nmap scan report for localhost (127.0.0.1)\nHost is up (0.00023s latency).\n\nPORT     STATE  SERVICE\n22/tcp   closed ssh\n80/tcp   open   http\n443/tcp  open   https\n1337/tcp open   waste\n\n🏴 CTF{p0rt_1337_1s_4lw4ys_0p3n}` });
+            setIsProcessing(false);
+            setTimeout(() => inputRef.current?.focus(), 10);
+          }, 2000);
+        } else {
+          addToHistory({ type: 'error', content: `nmap: Network scanning from this terminal is restricted.` });
+        }
+        break;
+
+      case 'exploit':
+        setIsProcessing(true);
+        addToHistory({ type: 'output', content: `[*] Initializing exploit framework...\n[*] Loading payload: reverse_shell/tcp\n[*] Target: 192.168.1.1:4444` });
+        setTimeout(() => {
+          addToHistory({ type: 'error', content: `[-] Exploit failed: Target is patched.\n[-] Try harder. Real security engineers don't give up.` });
+          addToHistory({ type: 'success', content: `🏴 CTF{expl01t_d3v_1n_pr0gr3ss}` });
+          setIsProcessing(false);
+          setTimeout(() => inputRef.current?.focus(), 10);
+        }, 2500);
+        break;
+
+      case '.secret':
+        addToHistory({ type: 'success', content: `You found the hidden file.\n\n🏴 CTF{h1dd3n_f1l3s_4r3_my_f4v}` });
+        addToHistory({ type: 'output', content: `5/5 flags found. You're good at this. Hire me?` });
+        break;
+
       default:
         addToHistory({ type: 'error', content: `Command not found: ${command}. Type 'help' for available commands.` });
     }

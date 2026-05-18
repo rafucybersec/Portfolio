@@ -1,0 +1,22 @@
+/* TEAM */
+Developer: Muhammad Rafay Ali
+Role: Cyber Security Engineer
+Location: Islamabad, Pakistan
+Contact: muhammad.rafayali@outlook.com
+GitHub: https://github.com/rafucybersec
+LinkedIn: https://linkedin.com/in/muhammadrafayali/
+
+/* SITE */
+Standards: HTML5, CSS3, JavaScript ES2022
+Framework: Next.js 14 (App Router)
+Language: TypeScript
+Styling: Tailwind CSS v4
+Animation: GSAP, Three.js
+Deployment: Vercel
+Last Updated: 2026-05-17
+
+/* THANKS */
+GSAP - GreenSock Animation Platform
+Three.js - 3D Graphics Library
+Vercel - Deployment Platform
+Lucide Icons - Icon Library

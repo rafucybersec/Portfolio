@@ -1,62 +1,103 @@
 import React from 'react';
-import { Award, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+import { ExternalLink } from 'lucide-react';
 
 const certifications = [
   {
-    name: "Certified SOC Analyst Foundation",
-    issuer: "SIEM XPERT",
+    name: "Certified in Cybersecurity (CC)",
+    issuer: "ISC2",
     date: "2024",
-    link: "/certificates/SOC Foundation.pdf"
+    link: "/certificates/Certified in Cybersecurity.pdf",
+    logoType: "isc2" as const,
   },
   {
     name: "ISO/IEC 27001:2022 Lead Auditor",
     issuer: "MasterMind",
     date: "2025",
-    link: "/certificates/ISO 27001 Lead Auditor.pdf"
+    link: "/certificates/ISO 27001 Lead Auditor.pdf",
+    logoType: "mastermind" as const,
   },
   {
-    name: "ISO/IEC 27001:2022 Information Security Associate",
-    issuer: "SKILLFRONT",
+    name: "SOC Analyst Foundation",
+    issuer: "SIEM XPERT",
     date: "2024",
-    link: "/certificates/ISO 27001 INFORMATION SECURITY ASSOCIATE.pdf"
+    link: "/certificates/SOC Foundation.pdf",
+    logoType: "xpert" as const,
   },
   {
     name: "Cybersecurity Specialization",
     issuer: "Google",
     date: "2023",
-    link: "/certificates/Google Cybersecurity.pdf"
+    link: "/certificates/Google Cybersecurity.pdf",
+    logoType: "google" as const,
   },
   {
     name: "Security Analyst Fundamentals",
     issuer: "IBM",
     date: "2023",
-    link: "/certificates/Security Analyst Fundamentals.pdf"
+    link: "/certificates/Security Analyst Fundamentals.pdf",
+    logoType: "ibm" as const,
   },
   {
-    name: "Certified in Cybersecurity (CC)",
-    issuer: "ISC2",
+    name: "ISO/IEC 27001:2022 Information Security Associate",
+    issuer: "SKILLFRONT",
     date: "2024",
-    link: "/certificates/Certified in Cybersecurity.pdf"
+    link: "/certificates/ISO 27001 INFORMATION SECURITY ASSOCIATE.pdf",
+    logoType: "skillfront" as const,
   },
   {
     name: "Ethical Hacking & Penetration Testing",
     issuer: "Udemy",
     date: "2023",
-    link: "/certificates/UEH.pdf"
+    link: "/certificates/UEH.pdf",
+    logoType: "udemy" as const,
   },
   {
     name: "Linux 100",
     issuer: "TCM Security",
     date: "2024",
-    link: "/certificates/linux-100-tcm.pdf"
+    link: "/certificates/linux-100-tcm.pdf",
+    logoType: "tcm" as const,
   },
   {
     name: "Active Lab Profile | Red/Blue Team Practice",
     issuer: "TryHackMe",
-    date: "Active",
-    link: "https://tryhackme.com/p/0xRafuSec"
+    date: "2019 - Present",
+    link: "https://tryhackme.com/p/rafucybersec",
+    logoType: "tryhackme" as const,
   }
 ];
+
+// Map logoType to actual image file or fallback SVG
+const logoMap: Record<string, string | null> = {
+  google: "/icons/google.png",
+  ibm: "/icons/ibm.png",
+  mastermind: "/icons/mastermind.png",
+  xpert: "/icons/xpert.png",
+  skillfront: "/icons/skillfront.jpg",
+  tcm: "/icons/tcm.jpg",
+  tryhackme: "/icons/tryhackme.png",
+  isc2: "/icons/isc2.jpg",
+  udemy: "/icons/udemy.png",
+};
+
+const CertLogo = ({ type }: { type: string }) => {
+  const src = logoMap[type];
+
+  // Use actual image if available
+  if (src) {
+    return (
+      <Image
+        src={src}
+        alt={type}
+        width={28}
+        height={28}
+        className="object-contain rounded-sm"
+        style={{ width: 'auto', height: 'auto', maxWidth: '28px', maxHeight: '28px' }}
+      />
+    );
+  }
+};
 
 const Certifications: React.FC = () => {
   return (
@@ -77,13 +118,13 @@ const Certifications: React.FC = () => {
             >
               <div className="absolute inset-0 bg-cyber-green-dark/5 dark:bg-cyber-green/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               
-              <div className="flex-shrink-0 w-12 h-12 bg-white dark:bg-[#00ff9d]/10 rounded-full flex items-center justify-center text-cyber-green-dark dark:text-cyber-green border border-cyber-green-dark/20 dark:border-cyber-green/20 relative z-10 transition-all duration-500 group-hover:scale-[1.2] group-hover:rotate-[360deg]">
-                <Award size={24} />
+              <div className="flex-shrink-0 w-12 h-12 bg-white dark:bg-[#00ff9d]/10 rounded-full flex items-center justify-center border border-cyber-green-dark/20 dark:border-cyber-green/20 relative z-10 transition-all duration-500 group-hover:scale-[1.2] group-hover:rotate-[360deg] overflow-hidden">
+                <CertLogo type={cert.logoType} />
               </div>
               
               <div className="flex-1 relative z-10">
                 <h3 className="font-bold text-cyber-green-dark dark:text-cyber-green text-sm font-satoshi pr-6">{cert.name}</h3>
-                <p className="text-white dark:text-cyber-white text-xs mt-1 font-satoshi">{cert.issuer}</p>
+                <p className="text-white dark:text-cyber-white text-xs mt-1 font-satoshi">{cert.issuer} · {cert.date}</p>
               </div>
 
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-0 translate-x-4">
