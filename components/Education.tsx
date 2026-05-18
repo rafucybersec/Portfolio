@@ -28,7 +28,7 @@ const Education: React.FC = () => {
               <div className="flex-1">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                   <h3 className="text-lg md:text-xl font-bold text-cyber-green font-satoshi">
-                    Bachelor of Science in Computer Science
+                    BS Computer Science
                   </h3>
                   <div className="flex items-center gap-2 text-cyber-green text-sm font-satoshi mt-2 sm:mt-0">
                     <Calendar size={14} />

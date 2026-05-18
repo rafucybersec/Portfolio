@@ -27,23 +27,21 @@ const CyberDotCursor: React.FC = () => {
     return (hasTouchScreen && isSmallScreen) || mobileRegex.test(userAgent.toLowerCase());
   }, []);
 
-  // Spawn star particles at cursor position
+  // Spawn dots for trail at cursor position
   const spawnParticle = useCallback(() => {
     const { x, y } = mouseRef.current;
-    const angle = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 1.5 + 0.3;
     particlesRef.current.push({
       x,
       y,
-      size: Math.random() * 3 + 1,
-      opacity: Math.random() * 0.6 + 0.4,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
+      size: Math.random() * 2 + 2.5,
+      opacity: Math.random() * 0.5 + 0.4,
+      vx: (Math.random() - 0.5) * 0.8,
+      vy: (Math.random() - 0.5) * 0.8,
       life: 1,
     });
 
     // Cap particles for performance
-    if (particlesRef.current.length > 40) {
+    if (particlesRef.current.length > 50) {
       particlesRef.current.shift();
     }
   }, []);
@@ -75,11 +73,8 @@ const CyberDotCursor: React.FC = () => {
       mouseRef.current.y = e.clientY;
       gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.08, ease: 'power2.out', overwrite: true });
 
-      // Spawn a trail particle every 2 mouse moves
-      spawnCounter++;
-      if (spawnCounter % 2 === 0) {
-        spawnParticle();
-      }
+      // Spawn a trail particle on mouse move
+      spawnParticle();
     };
 
     const enterHandler = (e: MouseEvent) => {
@@ -138,19 +133,9 @@ const CyberDotCursor: React.FC = () => {
         ctx.shadowColor = '#00ff9d';
         ctx.shadowBlur = s * 3;
 
-        // Star shape
+        // Circle shape
         ctx.beginPath();
-        const spikes = 4;
-        const outerR = s;
-        const innerR = s * 0.35;
-        for (let j = 0; j < spikes * 2; j++) {
-          const r = j % 2 === 0 ? outerR : innerR;
-          const angle = (j * Math.PI) / spikes - Math.PI / 2;
-          const sx = p.x + Math.cos(angle) * r;
-          const sy = p.y + Math.sin(angle) * r;
-          if (j === 0) ctx.moveTo(sx, sy);
-          else ctx.lineTo(sx, sy);
-        }
+        ctx.arc(p.x, p.y, s, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fill();
         ctx.restore();
@@ -190,7 +175,7 @@ const CyberDotCursor: React.FC = () => {
       {/* Main cursor dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-[8px] h-[8px] rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-[9.5px] h-[9.5px] rounded-full pointer-events-none z-[9999]"
         style={{
           willChange: 'transform',
           backgroundColor: '#00ff9d',
