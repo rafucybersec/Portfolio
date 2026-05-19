@@ -159,5 +159,5 @@ The layout uses custom colors configured inside `tailwind.config.js`:
 ***
 
 <p align="center">
-  Built with passion by <strong>0xRafuSec</strong>
+  Built with passion by <strong>0xRafuSec</strong> ⚡ Co-engineered with <a href="https://github.com/claude"><strong>Claude</strong></a>
 </p>
