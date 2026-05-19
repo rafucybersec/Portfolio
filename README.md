@@ -152,12 +152,12 @@ The layout uses custom colors configured inside `tailwind.config.js`:
 ## 🤝 Let's Connect
 
 - **Live URL:** [rafucybersec.vercel.app](https://rafucybersec.vercel.app)
-- **GitHub profile:** [0xRafuSec](https://github.com/0xRafuSec)
+- **GitHub profile:** [RafuCyberSec](https://github.com/rafucybersec)
 - **LinkedIn network:** [Muhammad Rafay Ali](https://linkedin.com/in/muhammadrafayali)
-- **Secure Email:** muhammad.rafayali@outlook.com
+- **Secure Email:** [muhammad.rafayali@outlook.com](mailto:muhammad.rafayali@outlook.com)
 
 ***
 
 <p align="center">
-  Built with passion by <strong>0xRafuSec</strong> ⚡ Co-engineered with <a href="https://github.com/claude"><strong>Claude</strong></a>
+  Built with 💛 by <strong>Muhammad Rafay Ali</strong>
 </p>
