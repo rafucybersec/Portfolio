@@ -30,7 +30,7 @@ const insights = [
     icon: FileSearch,
     value: "60%",
     label: "Faster Compliance Mapping",
-    detail: "Automated ISO 27001 to NCA/SAMA/ADHICS correlation",
+    detail: "Automated ISO 27001 to NCA/SAMA correlation",
   },
   {
     icon: TrendingUp,
@@ -55,7 +55,7 @@ const Insights: React.FC = () => {
           {insights.map((item, index) => (
             <div
               key={index}
-              className="group relative text-center p-5 rounded-xl border border-[#00ff9d]/15 bg-[#00ff9d]/5 hover:border-[#00ff9d]/40 hover:bg-[#00ff9d]/10 transition-all duration-300"
+              className="group relative flex flex-col text-center p-5 rounded-xl border border-[#00ff9d]/15 bg-[#00ff9d]/5 hover:border-[#00ff9d]/40 hover:bg-[#00ff9d]/10 transition-all duration-300"
             >
               <div className="flex justify-center mb-3">
                 <item.icon
@@ -66,10 +66,10 @@ const Insights: React.FC = () => {
               <div className="text-2xl md:text-3xl font-bold text-cyber-green font-satoshi mb-1">
                 {item.value}
               </div>
-              <div className="text-xs font-bold text-white uppercase tracking-wide font-satoshi mb-2">
+              <div className="text-xs font-bold text-cyber-green uppercase tracking-wide font-satoshi mb-2 h-9 flex items-start justify-center">
                 {item.label}
               </div>
-              <div className="text-[11px] text-white/90 font-satoshi leading-tight">
+              <div className="text-[11px] text-white font-satoshi leading-tight">
                 {item.detail}
               </div>
             </div>

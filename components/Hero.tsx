@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronRight, Download, Terminal } from 'lucide-react';
+import { ChevronRight, Terminal } from 'lucide-react';
 import { gsap } from 'gsap';
 import HeroSkillsCircle from './HeroSkillsCircle';
 
@@ -105,7 +105,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 pb-10 overflow-hidden" id="home">
+    <section className="relative min-h-screen flex items-center justify-center pt-20 pb-10 overflow-hidden" id="hero">
       {/* Subtle radial gradient overlays for hero-specific depth */}
       <div className="absolute inset-0 z-[1] pointer-events-none" />
       <div className="absolute inset-0 z-[1] pointer-events-none" />
@@ -229,7 +229,6 @@ const Hero: React.FC = () => {
               >
                 <div className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-cyber-blue-dark/10 dark:via-cyber-blue/20 to-transparent group-hover:animate-shimmer skew-x-[10deg]"></div>
                 <span className="skew-x-[10deg] flex items-center gap-2 relative z-10">
-                  <Download size={18} />
                   View Resume
                 </span>
               </a>

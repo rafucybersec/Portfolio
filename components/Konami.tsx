@@ -27,12 +27,12 @@ const Konami: React.FC = () => {
   if (!showModal) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fade-in-up">
-      <div className="bg-gray-900 border-2 border-cyber-green rounded-lg p-8 max-w-md w-full text-center relative shadow-[0_0_50px_rgba(0,255,157,0.3)]">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-sm p-4 animate-fade-in-up">
+      <div className="bg-transparent border-2 border-cyber-green rounded-lg p-8 max-w-md w-full text-center relative shadow-[0_0_50px_rgba(0,255,157,0.3)]">
         <button 
           onClick={() => setShowModal(false)}
           aria-label="Close dialog"
-          className="absolute top-2 right-2 text-gray-500 hover:text-white"
+          className="absolute top-2 right-2 text-white hover:text-white"
         >
           <X size={24} />
         </button>
@@ -44,11 +44,11 @@ const Konami: React.FC = () => {
         <h2 className="text-2xl font-bold text-white mb-2 font-satoshi">ACCESS GRANTED</h2>
         <p className="text-cyber-green font-satoshi text-sm mb-6">You found the hidden flag!</p>
         
-        <div className="bg-black p-4 rounded border border-gray-700 font-satoshi text-cyber-blue text-lg">
+        <div className="p-4 rounded font-satoshi text-cyber-green text-lg">
           {`{FLAG: HIRED_ME_YET?}`}
         </div>
         
-        <p className="mt-6 text-gray-500 text-xs">
+        <p className="mt-6 text-white text-xs">
           Great job with the recon.
         </p>
       </div>

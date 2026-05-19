@@ -17,10 +17,12 @@ const About: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-cyber-green-dark dark:text-cyber-green font-satoshi tracking-widest text-sm uppercase mb-2">Introduction</p>
             <h2 className="text-4xl md:text-5xl font-satoshi font-bold text-white dark:text-white">
               Over<span className="text-cyber-green-dark dark:text-cyber-green">view</span>
             </h2>
+            <p className="text-center text-cyber-green font-satoshi font-bold text-medium tracking-widest mb-12">
+              Introduction
+            </p>
           </div>
 
           <div className="bg-transparent backdrop-blur-sm border border-cyber-green-dark rounded-2xl p-8 md:p-12 shadow-none relative overflow-hidden transition-all hover:border-cyber-green/50">

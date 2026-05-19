@@ -33,7 +33,7 @@ const CyberDotCursor: React.FC = () => {
     particlesRef.current.push({
       x,
       y,
-      size: Math.random() * 2 + 2.5,
+      size: Math.random() * 1 + 1,
       opacity: Math.random() * 0.5 + 0.4,
       vx: (Math.random() - 0.5) * 0.8,
       vy: (Math.random() - 0.5) * 0.8,
@@ -41,7 +41,7 @@ const CyberDotCursor: React.FC = () => {
     });
 
     // Cap particles for performance
-    if (particlesRef.current.length > 50) {
+    if (particlesRef.current.length > 30) {
       particlesRef.current.shift();
     }
   }, []);
@@ -65,9 +65,7 @@ const CyberDotCursor: React.FC = () => {
 
     // Set initial position
     gsap.set(dot, { xPercent: -50, yPercent: -50, x: window.innerWidth / 2, y: window.innerHeight / 2 });
-
-    let spawnCounter = 0;
-
+    
     const moveHandler = (e: MouseEvent) => {
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
@@ -175,7 +173,7 @@ const CyberDotCursor: React.FC = () => {
       {/* Main cursor dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-[9.5px] h-[9.5px] rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-[9px] h-[9px] rounded-full pointer-events-none z-[9999]"
         style={{
           willChange: 'transform',
           backgroundColor: '#00ff9d',

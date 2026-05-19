@@ -63,7 +63,7 @@ const breadcrumbData = {
     {
       '@type': 'ListItem',
       position: 1,
-      name: 'Home',
+      name: 'Hero',
       item: 'https://rafucybersec.vercel.app',
     },
     {

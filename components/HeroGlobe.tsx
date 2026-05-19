@@ -10,7 +10,7 @@ type Skill = { name: string; icon: string };
 
 const SKILLS: Skill[] = [
   { name: "Wazuh", icon: "/icons/wazuh.svg" },
-  { name: "IBM QRadar", icon: "/icons/qradar.png" },
+  { name: "ISO 27001", icon: "/icons/iso_27001.png" },
   { name: "Python", icon: "/icons/python.png" },
   { name: "Docker", icon: "/icons/docker.svg" },
   { name: "GitHub", icon: "/icons/github.svg" },
@@ -123,7 +123,7 @@ function IconSprite({
     meshRef.current.scale.set(s, s, s);
     // Smooth opacity
     if (matRef.current) {
-      const targetOpacity = hovered ? 1 : 0.5;
+      const targetOpacity = hovered ? 1.5 : 0.8;
       matRef.current.opacity = THREE.MathUtils.lerp(matRef.current.opacity, targetOpacity, delta * 8);
     }
   });
@@ -198,7 +198,7 @@ function RotatingGroup({
           color="#048d59"
           wireframe
           transparent
-          opacity={0.32}
+          opacity={0.40}
         />
       </mesh>
 

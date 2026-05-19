@@ -191,51 +191,58 @@ const Icons = {
   ),
   NCAECC: () => (
     <SkillImage
-      src="/icons/NCA_ECC.png"
+      src="/icons/nca.png"
       alt="NCA-ECC"
-      className="w-8 h-8 sm:w-40 sm:h-40 object-contain brightness-1000"
+      className="w-8 h-8 sm:w-15 sm:h-14 object-contain"
     />
   ),
   SAMA: () => (
     <SkillImage
-      src="/icons/SAMA_CSF.png"
+      src="/icons/sama.png"
       alt="SAMA CSF"
-      className="w-8 h-8 sm:w-17 sm:h-17 object-contain brightness-1000"
+      className="w-8 h-8 sm:w-19 sm:h-19 object-contain"
     />
   ),
   ADHICS: () => (
     <SkillImage
       src="/icons/adhics.png"
       alt="ADHICS"
-      className="w-8 h-8 sm:w-40 sm:h-40 object-contain brightness-1000"
+      className="w-8 h-8 sm:w-40 sm:h-40 object-contain"
     />
   ),
   IncidentResponse: () => (
     <SkillImage
-      src="/icons/incident_response.png"
+      src="/icons/IR.png"
       alt="Incident Response"
-      className="w-8 h-8 sm:w-13 sm:h-13 object-contain invert"
+      className="w-8 h-8 sm:w-13 sm:h-13 object-contain"
+    />
+  ),
+  IncidentDocumentation: () => (
+    <SkillImage
+      src="/icons/ID.png"
+      alt="Incident Documentation"
+      className="w-8 h-8 sm:w-13 sm:h-13 object-contain"
     />
   ),
   AlertTuning: () => (
     <SkillImage
       src="/icons/alert_tuning.png"
       alt="Alert Tuning"
-      className="w-8 h-8 sm:w-12 sm:h-12 object-contain invert"
+      className="w-8 h-8 sm:w-12 sm:h-12 object-contain"
     />
   ),
   APIIntegration: () => (
     <SkillImage
-      src="/icons/api_integration.png"
+      src="/icons/api.png"
       alt="API Integration"
-      className="w-8 h-8 sm:w-15 sm:h-15 object-contain brightness-100 invert"
+      className="w-8 h-8 sm:w-22 sm:h-22 object-contain"
     />
   ),
   RuleParsing: () => (
     <SkillImage
-      src="/icons/rules_parsing.png"
+      src="/icons/rule.png"
       alt="Rule Parsing"
-      className="w-8 h-8 sm:w-15 sm:h-15 object-contain brightness-100 invert"
+      className="w-8 h-8 sm:w-22 sm:h-22 object-contain"
     />
   ),
   Vercel: () => (
@@ -250,10 +257,10 @@ const Icons = {
 import { ShieldAlert, Zap, Cloud, Scale, Bot, AlertTriangle } from 'lucide-react';
 
 const SkillBadge = ({ icon: Icon, name, isCustom = false }: { icon: any, name: string, isCustom?: boolean }) => (
-  <div className="group relative flex items-center justify-center p-0 hover:border-cyber-green transition-all duration-500 w-16 h-16 sm:w-18 sm:h-18 shadow-none hover:shadow-[0_0_25px_rgba(0,255,157,0.5)] cursor-pointer">
+  <div className="group relative flex items-center justify-center p-0 hover:border-cyber-green transition-all duration-500 w-16 h-16 sm:w-18 sm:h-18 cursor-pointer">
 
     {/* Icon container */}
-    <div className="text-white dark:text-white group-hover:text-cyber-green-dark dark:group-hover:text-cyber-green transition-all duration-300">
+    <div className="text-white dark:text-white group-hover:text-cyber-green-dark dark:group-hover:text-cyber-green transition-all hover:scale-[1.2] hover:rotate-[360deg] duration-300">
       {isCustom ? <Icon /> : <Icon className="w-8 h-8 sm:w-10 sm:h-10 transition-transform duration-300" strokeWidth={1.5} />}
     </div>
 
@@ -383,7 +390,7 @@ const Skills: React.FC = () => {
             </div>
             <div className="flex flex-wrap gap-4 flex-1">
               <SkillBadge icon={Icons.IncidentResponse} name="Incident Response" isCustom={true} />
-              <SkillBadge icon={Icons.IncidentResponse} name="Incident Documentation" isCustom={true} />
+              <SkillBadge icon={Icons.IncidentDocumentation} name="Incident Documentation" isCustom={true} />
               <SkillBadge icon={Icons.RuleParsing} name="Rule Parsing" isCustom={true} />
               <SkillBadge icon={Icons.AlertTuning} name="Alert Tuning" isCustom={true} />
               <SkillBadge icon={Icons.APIIntegration} name="API Integration" isCustom={true} />
