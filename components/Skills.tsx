@@ -197,7 +197,7 @@ const Icons = {
     <SkillImage
       src="/icons/sama.png"
       alt="SAMA CSF"
-      className="w-8 h-8 sm:w-19 sm:h-19 object-contain"
+      className="w-8 h-8 sm:w-18 sm:h-18 object-contain"
     />
   ),
   ADHICS: () => (

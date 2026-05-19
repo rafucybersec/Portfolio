@@ -71,7 +71,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
     bootSequence.forEach(({ text, delay }, index) => {
       setTimeout(() => {
         setLines((prev) => [...prev, { text, displayed: '' }]);
-        
+
         let charIndex = 0;
         const typingInterval = setInterval(() => {
           setLines((prev) => {
@@ -84,13 +84,13 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             }
             return newLines;
           });
-          
+
           charIndex++;
           if (charIndex >= text.length) {
             clearInterval(typingInterval);
           }
         }, 12); // Faster typing: 12ms per character
-        
+
         typingIntervals.push(typingInterval);
       }, delay);
     });
@@ -109,7 +109,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
     // Complete after full animation finishes
     timeoutId = setTimeout(() => {
       onComplete();
-    }, 4500);
+    }, 4000);
 
     return () => {
       clearTimeout(timeoutId);
@@ -121,7 +121,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
   return (
     <div className="fixed inset-0 bg-black z-[100] flex flex-col items-center justify-center font-satoshi text-green-500 overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 opacity-30" />
-      
+
       <div className="relative z-10 w-full max-w-lg p-6 bg-black/80 border border-green-500/30 rounded-lg shadow-[0_0_50px_rgba(0,255,0,0.1)] backdrop-blur-sm">
         <div className="h-64 overflow-hidden mb-6 font-satoshi text-sm md:text-base">
           {lines.map((line, index) => (
@@ -130,7 +130,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
               <span className={index === lines.length - 1 ? "text-white font-bold" : "text-green-500/80"}>
                 {line.displayed}
                 {line.displayed.length < line.text.length && (
-                  <span className="inline-block w-2 h-4 bg-green-500 animate-pulse ml-1"/>
+                  <span className="inline-block w-2 h-4 bg-green-500 animate-pulse ml-1" />
                 )}
               </span>
             </div>
@@ -143,7 +143,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             <span>{progress}%</span>
           </div>
           <div className="h-1 bg-gray-900 rounded-full overflow-hidden border border-green-900">
-            <div 
+            <div
               className="h-full bg-green-500 shadow-[0_0_15px_#00ff00] transition-all duration-75 ease-out"
               style={{ width: `${progress}%` }}
             />
