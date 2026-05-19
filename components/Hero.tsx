@@ -7,7 +7,7 @@ import HeroSkillsCircle from './HeroSkillsCircle';
 
 const Hero: React.FC = () => {
   const [descriptionDisplayed, setDescriptionDisplayed] = useState('');
-  const [nameDisplayed, setNameDisplayed] = useState('');
+  const [nameDisplayed, setNameDisplayed] = useState('Muhammad Rafay Ali');
   const [titleDisplayed, setTitleDisplayed] = useState('');
 
   // Refs for GSAP entrance

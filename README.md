@@ -1,215 +1,163 @@
-# 🛡️ 0xRafuSec — Cybersecurity Portfolio
+# 🛡️ 0xRafuSec | Cybersecurity Portfolio
 
-A modern, terminal-themed cybersecurity portfolio built with **Next.js 16**, featuring an interactive "Threat Network" particle background, a 3D skill globe (Three.js), animated typing sequences, and hands-on security tools — all wrapped in a neon-green hacker aesthetic with the **Satoshi** typeface.
+A terminal-inspired portfolio website built with Next.js 16, React 19, and Tailwind CSS v4. It features a custom 3D skill globe, an interactive particle background that repels away from your mouse cursor, a zero-knowledge password auditor, and a functional command-line interface with 5 hidden CTF flags to find.
 
-<p align="center">
-  <a href="https://rafucybersec.vercel.app" target="_blank"><strong>🌐 Live Site →</strong></a>
-</p>
+[![Live Demo](https://img.shields.io/badge/Live_Site-rafucybersec.vercel.app-00ff9d?style=flat&logo=vercel&logoColor=black)](https://rafucybersec.vercel.app)
+![Next.js 16](https://img.shields.io/badge/Next.js-16.2.4-black?logo=next.js)
+![React 19](https://img.shields.io/badge/React-19.2.5-blue?logo=react)
+![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-4.2.4-38B2AC?logo=tailwind-css)
+![Three.js](https://img.shields.io/badge/Three.js-0.184.0-black?logo=three.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-blue?logo=typescript)
 
-![Next.js](https://img.shields.io/badge/Next.js-16.2-black?logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.2-38B2AC?logo=tailwind-css)
-![Three.js](https://img.shields.io/badge/Three.js-0.184-black?logo=three.js)
-![GSAP](https://img.shields.io/badge/GSAP-3.15-88CE02?logo=greensock)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?logo=framer)
-![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?logo=vercel)
+***
 
----
+## 🎮 Interactive Highlights
 
-## ✨ Highlights
+### 💻 Play the CTF inside the Terminal Zone
+The website includes an interactive command line emulator. You can run normal Linux commands (`ls`, `cd`, `pwd`, `cat`, `ping`, `clear`), but it also hosts a built-in capture-the-flag mini-game. There are 5 hidden flags scattered across the files and tools.
 
-### 🌐 Threat Network Background
+Try finding them by running these commands:
+- **flag**: Initial command checking.
+- **sudo**: Attempting to escalate privileges.
+- **nmap localhost**: Scanning local ports.
+- **exploit**: Simulating a penetration testing framework.
+- **.secret**: Discovering hidden files in the directory root.
+- **Script execution**: Change directory into `~/tools` and run Python or Bash scripts:
+  - `python hash_cracker.py`
+  - `sh payload_gen.sh`
+  - `python nmap_scanner.py`
 
-- Canvas 2D particle system rendered across the **entire site** (`position: fixed`)
-- **~150 drifting starfield particles** with subtle pulse/blink effects
-- **~30 network nodes** connected by proximity lines (closer = more visible)
-- **Mouse repulsion** — nodes gently push away from the cursor across all sections
-- Auto-scales particle count on high-DPR displays for smooth 60fps performance
+### 🌐 Threat Network Canvas Background
+A custom 2D particle system runs behind the entire site. It renders about 150 floating particles connected by proximity-based lines. The physics engine tracks your mouse coordinates, causing nearby nodes to push away from your cursor in real time. It scales particle density dynamically depending on high-DPR screens to keep animations locked at a smooth 60fps.
 
-### 🔒 Interactive Security Tools
+### 🔒 Zero-Knowledge Password Auditor
+A functional utility built to demonstrate secure client-side cryptographic handling. It verifies password strength and checks if a password has been compromised in any known data breaches:
+- **Hashing**: Computes a SHA-1 hash of the input password entirely client-side.
+- **K-Anonymity**: It queries `/api/check-password` using only the first 5 characters of the SHA-1 hash.
+- **Matching**: The API returns a list of suffix hashes matching that prefix from Have I Been Pwned. The site matches the rest of the hash locally.
+- **Result**: No raw passwords ever leave your machine, preventing credential leakage.
 
-- **Terminal Emulator** — functional CLI with custom commands
-- **Threat Simulation** — simulated penetration testing demo
-- **Password Auditor** — real-time strength analysis with breach database check
-- **Konami Code Easter Egg** — try `↑ ↑ ↓ ↓ ← → ← → B A` 😉
+### 🔮 3D Skills Sphere
+A rotating 3D skill globe built using React Three Fiber and Three.js. It places interactive skill icons mathematically using a Fibonacci distribution across the surface of an icosahedron geometry. The sphere rotates automatically, scaling and highlighting individual skill tags when you hover over them.
 
-### 🎨 Visual Design
-
-- **Neon green (`#00ff9d`) + dark terminal** — cybersecurity-inspired color palette
-- **Typing animations** — sequential character-by-character reveal on hero text
-- **"Available For Hire" glow pulse** — animated badge with box-shadow glow
-- **Glassmorphism cards**, smooth scroll (Lenis), and Framer Motion transitions
-- **Splash screen** — fast boot sequence with scanline effect
-- **3D Skill Globe** — Three.js/R3F icosahedron with Fibonacci-distributed skill icons
-- **Satoshi typeface** — modern sans-serif body font (Fontshare), mono reserved for Navbar
-
----
-
-## 📱 Sections
-
-| Section            | Description                                                                          |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| **Hero**           | Name, title with typing animation, CTA buttons, skills circle                        |
-| **About**          | Professional summary with 2+ years of experience highlights                          |
-| **Skills**         | 6 categorized rows — SIEM, Offensive, Compliance, OS/Cloud, Security Ops, Automation |
-| **Encryption**     | Interactive lock animation with security metrics                                     |
-| **Certifications** | ISO 27001 Lead Auditor, ISC2 CC, Google Cybersecurity, and more                      |
-| **Experience**     | Timeline of 3 roles — Encbit, Cyber Silo, AIOU                                       |
-| **Education**      | Academic background                                                                  |
-| **Projects**       | Featured security projects with GitHub links                                         |
-| **Terminal Zone**  | Interactive CLI, hacking sim, and password analyzer                                  |
-| **Contact**        | Form powered by Resend email API                                                     |
-
----
-
-## 🚀 Quick Start
-
-```bash
-# Clone
-git clone https://github.com/0xRafuSec/rafu-portfolio.git
-cd rafu-portfolio
-
-# Install
-npm install
-
-# Dev server (Turbopack)
-npm run dev
-
-# Production build
-npm run build
-```
-
----
+***
 
 ## 🛠️ Tech Stack
 
-| Category      | Technology                              |
-| ------------- | --------------------------------------- |
-| Framework     | Next.js 16 (App Router)                            |
-| Language      | TypeScript 6.0                                     |
-| Styling       | Tailwind CSS 4.2                                   |
-| 3D / WebGL    | Three.js, React Three Fiber, React Three Drei       |
-| Animations    | GSAP, Framer Motion, CSS Keyframes, Canvas 2D       |
-| Typography    | Satoshi (Fontshare), JetBrains Mono, Cedarville Cursive |
-| Smooth Scroll | Lenis                                              |
-| Icons         | Lucide React + custom SVG/PNG brand icons           |
-| Email         | Resend API                                         |
-| Deployment    | Vercel                                             |
+- **Framework:** Next.js 16.2 (using App Router and Turbopack)
+- **Library:** React 19.2
+- **Styling:** Tailwind CSS v4.2 (using PostCSS configuration)
+- **3D Engine:** Three.js / React Three Fiber / Drei / Maath
+- **Animations:** GSAP (entrance timelines), Framer Motion (layout states)
+- **Typography:** Satoshi (Fontshare sans-serif), JetBrains Mono, Cedarville Cursive
+- **Smooth Scrolling:** Lenis Scroll
+- **Contact Service:** Resend API integration
+- **State/Cache:** Upstash Redis (for password checks or rate limiting)
 
----
+***
 
-## 📁 Project Structure
+## 📁 Directory Structure
 
-```
-rafu-portfolio/
+```text
+Portfolio/
 ├── app/
-│   ├── api/                  # API routes (contact form, password check)
-│   │   ├── check-password/
-│   │   └── contact/
+│   ├── api/                  # Backend endpoints
+│   │   ├── check-password/   # K-anonymity breach lookup
+│   │   └── contact/          # Contact email via Resend
 │   ├── contact/              # Contact page route
-│   ├── experience/           # Experience page route
-│   ├── projects/             # Projects page route
-│   ├── skills/               # Skills page route
-│   ├── globals.css           # Global styles + CSS animations
-│   ├── layout.tsx            # Root layout (fonts, metadata, analytics)
+│   ├── experience/           # Experience timeline page
+│   ├── projects/             # Project showcase page
+│   ├── skills/               # Tech skills page
+│   ├── globals.css           # Custom styles, transitions, and keyframes
+│   ├── layout.tsx            # Main layout layout wrapper with fonts and analytics
 │   ├── page.tsx              # Home entry point
 │   ├── robots.ts             # SEO robots config
 │   └── sitemap.ts            # SEO sitemap generator
-├── components/               # 21 React components
-│   ├── PortfolioContent.tsx   # Main layout orchestrator
-│   ├── StarBackground.tsx     # Global "Threat Network" canvas animation
-│   ├── Hero.tsx               # Hero section with typing animations
-│   ├── HeroGlobe.tsx          # 3D Three.js skill globe (Fibonacci sphere)
-│   ├── HeroSkillsCircle.tsx   # Animated skills orbit
-│   ├── SplashScreen.tsx       # Boot sequence splash screen
-│   ├── Terminal.tsx           # Interactive CLI emulator
-│   ├── HackingSim.tsx         # Threat simulation tool
-│   ├── PasswordAnalyzer.tsx   # Password strength checker
-│   ├── Konami.tsx             # Easter egg handler
-│   └── ...                    # About, Skills, Experience, etc.
+├── components/               # 21 custom UI components
+│   ├── PortfolioContent.tsx  # Combines all page sections
+│   ├── StarBackground.tsx    # Interactive particle network canvas
+│   ├── Hero.tsx              # Splash header and typing animation
+│   ├── HeroGlobe.tsx         # 3D interactive Fibonacci sphere
+│   ├── HeroSkillsCircle.tsx  # Floating orbital skills selector
+│   ├── SplashScreen.tsx      # Boot loader screen with scanline overlay
+│   ├── Terminal.tsx          # CLI terminal emulator and CTF host
+│   ├── PasswordAnalyzer.tsx  # Client-side hash auditor UI
+│   ├── Konami.tsx            # Key sequence detector
+│   └── ...                   # About, Experience, Navbar, Footer
 ├── lib/
-│   └── motion.ts             # Framer Motion animation presets
+│   └── motion.ts             # Shared animation configurations
 ├── providers/
-│   └── lenis-provider.tsx    # Smooth scroll provider
+│   └── lenis-provider.tsx    # Lenis smooth scrolling provider
 ├── public/
-│   ├── certificates/         # Certification images
-│   ├── icons/                # Skill SVG icons
-│   ├── videos/               # Section background videos
+│   ├── certificates/         # Certification badges
+│   ├── icons/                # Tech stack vector graphics
+│   ├── videos/               # Particle backgrounds for cards
 │   ├── resume.pdf            # Downloadable CV
-│   └── favicon.svg           # Site icon
-├── types.ts                  # TypeScript interfaces
-├── tailwind.config.js        # Theme colors, fonts, animations
-├── next.config.js            # Next.js configuration
-├── vercel.json               # Security headers & redirects
-└── tsconfig.json             # TypeScript config
+│   └── favicon.svg           # Custom vector favicon
+├── tailwind.config.js        # Accent colors and utility classes
+├── vercel.json               # Security headers and Vercel routing rules
+└── tsconfig.json             # TypeScript configuration
 ```
 
----
+***
 
-## 🎨 Customization
+## 🚀 Spin Up Locally
 
-### Theme Colors
+### Requirements
+Ensure you have Node.js 18 or higher installed on your system.
 
-Defined in `tailwind.config.js`:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/0xRafuSec/rafu-portfolio.git
+   cd rafu-portfolio
+   ```
 
-| Token              | Value     | Usage                             |
-| ------------------ | --------- | --------------------------------- |
-| `cyber-green`      | `#00ff9d` | Primary accent, particles, badges |
-| `cyber-green-dark` | `#00a365` | Light mode primary                |
-| `cyber-blue`       | `#00e1ff` | Secondary accent                  |
-| `cyber-blue-dark`  | `#0096aa` | Light mode secondary              |
-| `cyber-black`      | `#050505` | Deepest background                |
+2. **Configure environment variables:**
+   Create a `.env.local` file in the root folder and add your Resend API token:
+   ```env
+   RESEND_API_KEY=your_resend_api_key
+   ```
 
-### Content
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-Update your info in the component files:
+4. **Launch development server:**
+   Starts the Next.js Turbopack compiler.
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3000` to view the site.
 
-| File                 | Content                                |
-| -------------------- | -------------------------------------- |
-| `Hero.tsx`           | Name, title, description, social links |
-| `About.tsx`          | Professional summary                   |
-| `Experience.tsx`     | Work history & achievements            |
-| `Skills.tsx`         | Skill categories & badges              |
-| `Certifications.tsx` | Professional certifications            |
-| `Projects.tsx`       | Featured projects                      |
+5. **Build for production:**
+   ```bash
+   npm run build
+   npm run start
+   ```
 
----
+***
 
-## 📝 Environment Variables
+## 🎨 Theme Tokens
 
-```env
-# Required for contact form (https://resend.com)
-RESEND_API_KEY=your_resend_api_key
-```
+The layout uses custom colors configured inside `tailwind.config.js`:
+- **cyber-green (`#00ff9d`):** Primary neon accent, terminal lines, successful statuses.
+- **cyber-green-dark (`#00a365`):** Soft text alternative for light backgrounds.
+- **cyber-blue (`#00e1ff`):** Secondary interactive actions, informational fields.
+- **cyber-blue-dark (`#0096aa`):** Soft text alternative for the secondary color.
+- **cyber-black (`#050505`):** Base terminal background.
 
----
+***
 
-## 🔧 Scripts
+## 🤝 Let's Connect
 
-| Command         | Description                  |
-| --------------- | ---------------------------- |
-| `npm run dev`   | Start dev server (Turbopack) |
-| `npm run build` | Production build             |
-| `npm run start` | Start production server      |
-| `npm run lint`  | Run ESLint                   |
+- **Live URL:** [rafucybersec.vercel.app](https://rafucybersec.vercel.app)
+- **GitHub profile:** [0xRafuSec](https://github.com/0xRafuSec)
+- **LinkedIn network:** [Muhammad Rafay Ali](https://linkedin.com/in/muhammadrafayali)
+- **Secure Email:** muhammad.rafayali@outlook.com
 
----
-
-## 📄 License
-
-MIT License — feel free to use this as a template for your own portfolio.
-
----
-
-## 🤝 Connect
-
-- **Portfolio**: [rafucybersec.vercel.app](https://rafucybersec.vercel.app)
-- **GitHub**: [0xRafuSec](https://github.com/0xRafuSec)
-- **LinkedIn**: [Muhammad Rafay Ali](https://linkedin.com/in/muhammadrafayali)
-- **Email**: muhammad.rafayali@outlook.com
-
----
+***
 
 <p align="center">
-  Made with 💛 by <strong>0xRafuSec</strong>
+  Built with passion by <strong>0xRafuSec</strong>
 </p>
