@@ -97,9 +97,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add your verification codes here if needed
-    // google: 'your-google-verification-code',
-    // yandex: 'your-yandex-verification-code',
+    google: 'ElRIclZ7K1Uy3Nuuwc9z8h5qeUByzlZ6mQJjW4dM-B8',
+    yandex: '5bd5801e72ab9c06',
   },
 }
 
