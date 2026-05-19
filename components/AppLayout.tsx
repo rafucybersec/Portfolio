@@ -1,8 +1,8 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState, useEffect, useRef } from 'react'
-import { gsap } from '@/lib/gsap'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
 import { isLowEndDevice, prefersReducedMotion } from '@/lib/performance'
 import SplashScreen from './SplashScreen'
 
@@ -14,6 +14,7 @@ const CyberDotCursor = dynamic(() => import('./CyberDotCursor'), { ssr: false })
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
   const mainRef = useRef<HTMLDivElement>(null)
+  const gsapCtxRef = useRef<gsap.Context | null>(null)
 
   useEffect(() => {
     if (sessionStorage.getItem('hasSeenSplash')) {
@@ -21,16 +22,42 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // GSAP ScrollTrigger animate sections on scroll
-  useEffect(() => {
+  // Phase 1: Set initial hidden states BEFORE browser paints (prevents flash)
+  useLayoutEffect(() => {
     if (loading || !mainRef.current) return
-
-    const reducedMotion = prefersReducedMotion()
-    if (reducedMotion) return
+    if (prefersReducedMotion()) return
 
     const lowEnd = isLowEndDevice()
+    const sections = mainRef.current.querySelectorAll('section')
+
+    sections.forEach((section) => {
+      if (section.id === 'projects') return
+
+      const heading = section.querySelector('h2')
+      if (heading) {
+        gsap.set(heading, { y: 30, opacity: 0 })
+      }
+
+      const cards = section.querySelectorAll(
+        '.grid > a, .grid > div, .space-y-12 > div, .space-y-24 > div'
+      )
+      if (cards.length > 0) {
+        gsap.set(cards, { y: lowEnd ? 15 : 30, opacity: 0 })
+      }
+    })
+  }, [loading])
+
+  // Phase 2: Set up ScrollTrigger animations AFTER layout is stable
+  useEffect(() => {
+    if (loading || !mainRef.current) return
+    if (prefersReducedMotion()) return
+
+    const lowEnd = isLowEndDevice()
+    let cancelled = false
 
     const timer = setTimeout(() => {
+      if (cancelled || !mainRef.current) return
+
       const ctx = gsap.context(() => {
         const sections = mainRef.current!.querySelectorAll('section')
 
@@ -39,49 +66,51 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
           const heading = section.querySelector('h2')
           if (heading) {
-            gsap.fromTo(heading,
-              { y: 30, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: lowEnd ? 0.4 : 0.7,
-                ease: 'power3.out',
-                scrollTrigger: {
-                  trigger: heading,
-                  start: 'top 90%',
-                  toggleActions: 'play none none none',
-                },
-              }
-            )
+            gsap.to(heading, {
+              y: 0,
+              opacity: 1,
+              duration: lowEnd ? 0.4 : 0.7,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: heading,
+                start: 'top 90%',
+                toggleActions: 'play none none none',
+              },
+            })
           }
 
           const cards = section.querySelectorAll(
             '.grid > a, .grid > div, .space-y-12 > div, .space-y-24 > div'
           )
           if (cards.length > 0) {
-            gsap.fromTo(cards,
-              { y: lowEnd ? 15 : 30, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: lowEnd ? 0.3 : 0.5,
-                stagger: lowEnd ? 0.05 : 0.1,
-                ease: 'power2.out',
-                scrollTrigger: {
-                  trigger: section,
-                  start: 'top 85%',
-                  toggleActions: 'play none none none',
-                },
-              }
-            )
+            gsap.to(cards, {
+              y: 0,
+              opacity: 1,
+              duration: lowEnd ? 0.3 : 0.5,
+              stagger: lowEnd ? 0.05 : 0.1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+              },
+            })
           }
         })
       }, mainRef)
 
-      return () => ctx.revert()
-    }, 100)
+      gsapCtxRef.current = ctx
+    }, 200)
 
-    return () => clearTimeout(timer)
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+      if (gsapCtxRef.current) {
+        gsapCtxRef.current.revert()
+        gsapCtxRef.current = null
+      }
+      ScrollTrigger.getAll().forEach(t => t.kill())
+    }
   }, [loading])
 
   const loadingClass = loading ? 'h-screen overflow-hidden opacity-0' : 'opacity-100'
