@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useRef } from 'react';
 import { MapPin, Phone, Send, Mail } from 'lucide-react';
 
@@ -120,7 +122,7 @@ const Contact: React.FC = () => {
           {/* Contact Info */}
           <div>
             <h3 className="text-2xl font-satoshi font-bold text-gray-900 dark:text-cyber-green mb-8">Let's Connect</h3>
-            <p className="text-gray-600 dark:text-cyber-green mb-8 text-l font-satoshi font-light">
+            <p className="text-gray-700 dark:text-cyber-green mb-8 text-l font-satoshi font-light">
               I'm open to discussing SOC operations, SIEM engineering opportunities, and security consultation.
             </p>
 
@@ -137,7 +139,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-gray-900 dark:text-cyber-green font-medium group-hover:text-cyber-green-dark dark:group-hover:text-cyber-green transition-colors duration-300">Location</h4>
-                  <p className="text-gray-600 dark:text-white/85 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">Islamabad, Pakistan</p>
+                  <p className="text-gray-700 dark:text-white/85 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">Islamabad, Pakistan</p>
                 </div>
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
                   <svg className="w-5 h-5 text-cyber-green-dark dark:text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,7 +158,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-gray-900 dark:text-cyber-green font-medium group-hover:text-cyber-green-dark dark:group-hover:text-cyber-green transition-colors duration-300">Email</h4>
-                  <p className="text-gray-600 dark:text-white/85 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300 break-all">muhammad.rafayali@outlook.com</p>
+                  <p className="text-gray-700 dark:text-white/85 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300 break-all">muhammad.rafayali@outlook.com</p>
                 </div>
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
                   <svg className="w-5 h-5 text-cyber-green-dark dark:text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,7 +177,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-gray-900 dark:text-cyber-green font-medium group-hover:text-cyber-green-dark dark:group-hover:text-cyber-green transition-colors duration-300">Phone</h4>
-                  <p className="text-gray-600 dark:text-white/85 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">+92 300 9817 567</p>
+                  <p className="text-gray-700 dark:text-white/85 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">+92 300 9817 567</p>
                 </div>
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
                   <svg className="w-5 h-5 text-cyber-green-dark dark:text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">

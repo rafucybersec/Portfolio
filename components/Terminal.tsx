@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect, useRef } from 'react';
 import { TerminalLine } from '../types';
 import { Terminal as TerminalIcon, Copy, Loader } from 'lucide-react';
@@ -270,7 +272,7 @@ const Terminal: React.FC = () => {
         addToHistory({ type: 'success', content: `You found the hidden file.\n\n🏴 CTF{h1dd3n_f1l3s_4r3_my_f4v}` });
         addToHistory({ type: 'output', content: `5/5 flags found. You're good at this. Hire me?` });
         break;
-      
+
       case 'python':
       case 'python3':
         if (target?.includes('nmap_scanner.py') && currentDir === '~/tools') {
@@ -334,30 +336,30 @@ const Terminal: React.FC = () => {
       e.preventDefault();
       if (!input.trim()) return;
 
-        const parts = input.split(' ');
-        const isCompletingCommand = parts.length === 1;
-        const partial = parts[parts.length - 1];
+      const parts = input.split(' ');
+      const isCompletingCommand = parts.length === 1;
+      const partial = parts[parts.length - 1];
 
-        const commands = ['help','whoami','pwd','ls','cd','cat','ping','ssh','history','download','clear','nmap','sudo','exploit','flag','.secret'];
+      const commands = ['help', 'whoami', 'pwd', 'ls', 'cd', 'cat', 'ping', 'ssh', 'history', 'download', 'clear', 'nmap', 'sudo', 'exploit', 'flag', '.secret'];
 
-        if (isCompletingCommand) {
-          const matches = commands.filter(c => c.startsWith(partial));
-          if (matches.length === 1) {
-            setInput(matches[0] + ' ');
-          } else if (matches.length > 1) {
-            addToHistory({ type: 'output', content: matches.join('  ') });
-          }
-        } else {
-          // complete files/dirs in current directory
-          const files = fileSystem[currentDir] ?? [];
-          const matches = files.filter(f => f.startsWith(partial));
-          if (matches.length === 1) {
-            parts[parts.length - 1] = matches[0].replace('/', '');
-            setInput(parts.join(' ') + ' ');
-          } else if (matches.length > 1) {
-            addToHistory({ type: 'output', content: matches.join('  ') });
-          }
+      if (isCompletingCommand) {
+        const matches = commands.filter(c => c.startsWith(partial));
+        if (matches.length === 1) {
+          setInput(matches[0] + ' ');
+        } else if (matches.length > 1) {
+          addToHistory({ type: 'output', content: matches.join('  ') });
         }
+      } else {
+        // complete files/dirs in current directory
+        const files = fileSystem[currentDir] ?? [];
+        const matches = files.filter(f => f.startsWith(partial));
+        if (matches.length === 1) {
+          parts[parts.length - 1] = matches[0].replace('/', '');
+          setInput(parts.join(' ') + ' ');
+        } else if (matches.length > 1) {
+          addToHistory({ type: 'output', content: matches.join('  ') });
+        }
+      }
     }
   };
 
@@ -385,9 +387,9 @@ const Terminal: React.FC = () => {
         {history.map((line, i) => (
           <div key={i} className="group relative mb-1">
             <div className={`whitespace-pre-wrap leading-relaxed ${line.type === 'input' ? 'text-gray-800 dark:text-cyber-green font-satoshi font-bold mt-4' :
-                line.type === 'error' ? 'text-red-600 dark:text-red-400' :
-                  line.type === 'success' ? 'text-green-600 dark:text-green-400' :
-                    'text-gray-600 dark:text-cyber-blue'
+              line.type === 'error' ? 'text-red-600 dark:text-red-400' :
+                line.type === 'success' ? 'text-green-600 dark:text-green-400' :
+                  'text-gray-600 dark:text-cyber-blue'
               }`}>
               {line.content}
             </div>

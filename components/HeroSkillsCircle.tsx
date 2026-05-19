@@ -1,10 +1,34 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react';
 import dynamic from "next/dynamic";
 
 const HeroGlobe = dynamic(() => import("./HeroGlobe"), { ssr: false });
 
 export const HeroSkillsCircle = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative w-[460px] h-[520px] flex items-center justify-center">
+    <div ref={containerRef} className="relative w-[460px] h-[520px] flex items-center justify-center">
       {/* ── Cyber background effects ── */}
 
       {/* Outer radial glow cyber-green */}
@@ -101,7 +125,7 @@ export const HeroSkillsCircle = () => {
 
       {/* ── Three.js Globe ── */}
       <div className="relative w-full h-full">
-        <HeroGlobe />
+        {isVisible && <HeroGlobe />}
       </div>
     </div>
   );

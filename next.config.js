@@ -4,7 +4,7 @@ const nextConfig = {
   output: 'standalone',
   reactCompiler: false,
   experimental: {
-    optimizePackageImports: ['lucide-react', 'three', '@react-three/drei', 'gsap', 'framer-motion'],
+    optimizePackageImports: ['lucide-react', 'three', '@react-three/drei', 'gsap'],
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -33,6 +33,10 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.pwnedpasswords.com https://formspree.io;"
           },
         ],
       },

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Lock, Check, X, AlertTriangle } from 'lucide-react';
 
@@ -25,22 +27,42 @@ const PasswordAnalyzer: React.FC = () => {
       setBreachError(null);
 
       try {
+        // Hash password client-side (Zero-Knowledge)
+        const buffer = new TextEncoder().encode(password);
+        const hashBuffer = await crypto.subtle.digest('SHA-1', buffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const sha1Hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+        
+        const prefix = sha1Hash.substring(0, 5);
+        const suffix = sha1Hash.substring(5);
+
         const response = await fetch('/api/check-password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ password }),
+          body: JSON.stringify({ prefix }),
           signal: controller.signal,
         });
 
-        const data = await response.json();
-
         if (response.ok) {
-          setIsBreached(data.breached);
-          setBreachCount(data.count || 0);
+          const text = await response.text();
+          const hashes = text.split('\n');
+          
+          let foundCount = 0;
+          for (const line of hashes) {
+            const [hashSuffix, countStr] = line.split(':');
+            if (hashSuffix && hashSuffix.trim() === suffix) {
+              foundCount = parseInt(countStr.trim(), 10);
+              break;
+            }
+          }
+          
+          setIsBreached(foundCount > 0);
+          setBreachCount(foundCount);
           setBreachError(null);
         } else {
+          const data = await response.json().catch(() => ({}));
           // On error, don't mark as breached, just show error
           setIsBreached(false);
           setBreachCount(0);

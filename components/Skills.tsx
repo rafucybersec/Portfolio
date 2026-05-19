@@ -1,12 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
 
 const SkillImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => (
-  <Image
+  <img
     src={src}
     alt={alt}
-    width={160}
-    height={160}
     className={className}
     loading="lazy"
   />
@@ -275,8 +272,8 @@ const Skills: React.FC = () => {
   return (
     <section id="skills" className="py-20 transition-colors duration-300 scroll-mt-20 relative overflow-hidden">
       {/* Video Background for Skills - GREEN Filter */}
-      <div 
-        className="absolute inset-0 w-full h-full z-0 flex items-center justify-center overflow-hidden pointer-events-none"
+      <div
+        className="absolute inset-0 w-full h-full z-0 hidden md:flex items-center justify-center overflow-hidden pointer-events-none"
         style={{
           maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)'
@@ -408,8 +405,8 @@ const Skills: React.FC = () => {
             </div>
             <div className="flex flex-wrap gap-4 flex-1">
               <SkillBadge icon={Icons.Python} name="Python" isCustom={true} />
-              <SkillBadge icon={Icons.Bash} name="Bash" isCustom={true}/>
-              <SkillBadge icon={Icons.PowerShell} name="PowerShell" isCustom={true}/>
+              <SkillBadge icon={Icons.Bash} name="Bash" isCustom={true} />
+              <SkillBadge icon={Icons.PowerShell} name="PowerShell" isCustom={true} />
               <SkillBadge icon={Icons.Docker} name="Docker" isCustom={true} />
               <SkillBadge icon={Icons.GitHub} name="GitHub" isCustom={true} />
               <SkillBadge icon={Icons.NodeJS} name="Node.js" isCustom={true} />

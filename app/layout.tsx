@@ -119,8 +119,6 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth dark ${spaceGrotesk.variable} ${jetBrainsMono.variable} ${cedarvilleCursive.variable}`} suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://rafucybersec.vercel.app/" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         <meta name="author" content="Muhammad Rafay Ali" />
         <link

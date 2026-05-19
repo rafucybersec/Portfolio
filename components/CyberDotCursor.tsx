@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useRef, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
 
@@ -33,8 +35,8 @@ const CyberDotCursor: React.FC = () => {
     particlesRef.current.push({
       x,
       y,
-      size: Math.random() * 1 + 1,
-      opacity: Math.random() * 0.5 + 0.4,
+      size: Math.random() * 2 + 1.5,
+      opacity: Math.random() * 0.6 + 0.4,
       vx: (Math.random() - 0.5) * 0.8,
       vy: (Math.random() - 0.5) * 0.8,
       life: 1,
@@ -131,9 +133,14 @@ const CyberDotCursor: React.FC = () => {
         ctx.shadowColor = '#00ff9d';
         ctx.shadowBlur = s * 3;
 
-        // Circle shape
+        // Star shape
+        ctx.translate(p.x, p.y);
         ctx.beginPath();
-        ctx.arc(p.x, p.y, s, 0, Math.PI * 2);
+        ctx.moveTo(0, -s * 2);
+        ctx.quadraticCurveTo(0, 0, s * 2, 0);
+        ctx.quadraticCurveTo(0, 0, 0, s * 2);
+        ctx.quadraticCurveTo(0, 0, -s * 2, 0);
+        ctx.quadraticCurveTo(0, 0, 0, -s * 2);
         ctx.closePath();
         ctx.fill();
         ctx.restore();

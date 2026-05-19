@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState, useRef } from 'react';
 
 interface SplashScreenProps {
@@ -11,12 +13,12 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
 
   const bootSequence = [
     { text: "Initializing kernel...", delay: 0 },
-    { text: "Loading security modules [OK]", delay: 120 },
-    { text: "Verifying encrypted handshake...", delay: 240 },
-    { text: "Bypassing firewall...", delay: 380 },
-    { text: "Mounting virtual file system...", delay: 500 },
-    { text: "Establishing secure tunnel...", delay: 640 },
-    { text: "ACCESS GRANTED!", delay: 800 },
+    { text: "Loading security modules [OK]", delay: 500 },
+    { text: "Verifying encrypted handshake...", delay: 1000 },
+    { text: "Bypassing firewall...", delay: 1500 },
+    { text: "Mounting virtual file system...", delay: 2000 },
+    { text: "Establishing secure tunnel...", delay: 2500 },
+    { text: "ACCESS GRANTED!", delay: 3000 },
   ];
 
   // Matrix Rain Effect
@@ -57,7 +59,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       }
     };
 
-    const intervalId = setInterval(draw, 33);
+    const intervalId = setInterval(draw, 16);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -102,12 +104,12 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         }
         return prev + 10;
       });
-    }, 80);
+    }, 120);
 
-    // Complete after full animation finishes (last line at 800ms + typing time ~350ms + 50ms buffer)
+    // Complete after full animation finishes
     timeoutId = setTimeout(() => {
       onComplete();
-    }, 1200);
+    }, 4500);
 
     return () => {
       clearTimeout(timeoutId);

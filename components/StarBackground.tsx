@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { gsap } from "gsap";
+import { prefersReducedMotion } from "@/lib/performance";
 
 /**
  * Warp Speed Hyperspace Background
@@ -54,6 +55,7 @@ export default function WarpSpeedBackground() {
 
   useEffect(() => {
     if (!containerRef.current) return;
+    if (prefersReducedMotion()) return;
 
     // Scene
     const scene = new THREE.Scene();
@@ -162,12 +164,21 @@ export default function WarpSpeedBackground() {
 
     window.addEventListener("resize", onResize);
 
+    // Page Visibility
+    let isVisible = true;
+    const onVisibilityChange = () => {
+      isVisible = document.visibilityState === 'visible';
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
     // Animation loop
     const posAttr = geometry.attributes.position as THREE.BufferAttribute;
     const trailAttr = trailGeometry.attributes.position as THREE.BufferAttribute;
 
     const animate = () => {
       frameRef.current = requestAnimationFrame(animate);
+      
+      if (!isVisible) return;
 
       const arr = posAttr.array as Float32Array;
       const tArr = trailAttr.array as Float32Array;
@@ -226,6 +237,7 @@ export default function WarpSpeedBackground() {
       cancelAnimationFrame(frameRef.current);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       renderer.dispose();
       geometry.dispose();
       material.dispose();

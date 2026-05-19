@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
+
 import { rateLimit } from '@/lib/rate-limit';
 
 // Have I Been Pwned (HIBP) Pwned Passwords API
@@ -49,21 +49,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { password } = await request.json();
+    const { prefix } = await request.json();
 
-    if (!password || typeof password !== 'string') {
+    if (!prefix || typeof prefix !== 'string' || prefix.length !== 5) {
       return NextResponse.json(
-        { error: 'Password is required' },
+        { error: 'Valid 5-character prefix is required' },
         { status: 400 }
       );
     }
-
-    // Hash password with SHA-1 (HIBP uses SHA-1)
-    const sha1Hash = crypto.createHash('sha1').update(password).digest('hex').toUpperCase();
-    
-    // Split hash: first 5 chars (prefix) and rest (suffix)
-    const prefix = sha1Hash.substring(0, 5);
-    const suffix = sha1Hash.substring(5);
 
     try {
       // Build request URL
@@ -79,17 +72,16 @@ export async function POST(request: NextRequest) {
         headers['hibp-api-key'] = apiKey;
       }
 
-      // Fetch from HIBP (k-anonymity model - only sends first 5 chars of hash)
+      // Fetch from HIBP (k-anonymity model)
       let data = getCachedRange(prefix);
 
       if (!data) {
         const response = await fetch(apiUrl, { headers });
 
         if (!response.ok) {
-          // If rate limited or error, return unknown status
           if (response.status === 429) {
             return NextResponse.json(
-              { breached: false, count: 0, error: 'Rate limited. Please try again later.' },
+              { error: 'Rate limited. Please try again later.' },
               { status: 429 }
             );
           }
@@ -100,41 +92,22 @@ export async function POST(request: NextRequest) {
         setCachedRange(prefix, data);
       }
       
-      // Parse response: each line is "SUFFIX:COUNT"
-      const hashes = (data ?? '').split('\n');
-      
-      // Check if our hash suffix is in the results
-      for (const line of hashes) {
-        const [hashSuffix, countStr] = line.split(':');
-        if (hashSuffix === suffix) {
-          const count = parseInt(countStr.trim(), 10);
-          return NextResponse.json({
-            breached: true,
-            count: count,
-            message: `This password has been found in ${count.toLocaleString()} data breaches.`
-          });
+      return new NextResponse(data, {
+        headers: {
+          'Content-Type': 'text/plain',
+          'Cache-Control': 'public, max-age=300'
         }
-      }
-
-      // Password not found in breaches
-      return NextResponse.json({
-        breached: false,
-        count: 0,
-        message: 'Password not found in known data breaches.'
       });
 
     } catch (error: any) {
-      console.error('HIBP API error:', error);
-      // On error, return unknown (don't fail the password check, just skip breach detection)
+      // Don't log sensitive info
+      console.error('HIBP API error fetching range');
       return NextResponse.json({
-        breached: false,
-        count: 0,
         error: 'Unable to check password breaches. Please try again.'
       }, { status: 500 });
     }
 
   } catch (error: any) {
-    console.error('Password check error:', error);
     return NextResponse.json(
       { error: 'Invalid request' },
       { status: 400 }

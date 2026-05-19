@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
 
 const certifications = [
@@ -87,13 +86,12 @@ const CertLogo = ({ type }: { type: string }) => {
   // Use actual image if available
   if (src) {
     return (
-      <Image
+      <img
         src={src}
         alt={type}
-        width={28}
-        height={28}
         className="object-contain rounded-sm"
-        style={{ width: 'auto', height: 'auto', maxWidth: '28px', maxHeight: '28px' }}
+        style={{ maxWidth: '28px', maxHeight: '28px' }}
+        loading="lazy"
       />
     );
   }
@@ -114,6 +112,7 @@ const Certifications: React.FC = () => {
               href={cert.link}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View certification: ${cert.name}`}
               className="group relative flex items-center gap-4 bg-white/50 dark:bg-[#00ff9d]/5 backdrop-blur-md p-6 rounded-xl border border-gray-200 dark:border-[#00ff9d]/20 hover:border-cyber-green-dark/50 dark:hover:border-cyber-green/50 transition-all hover:translate-x-1 hover:shadow-lg dark:hover:shadow-[0_0_15px_#00ff9d_inset] overflow-hidden"
             >
               <div className="absolute inset-0 bg-cyber-green-dark/5 dark:bg-cyber-green/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>

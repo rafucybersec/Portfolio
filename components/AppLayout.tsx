@@ -1,0 +1,116 @@
+'use client'
+
+import dynamic from 'next/dynamic'
+import { useState, useEffect, useRef } from 'react'
+import { gsap } from '@/lib/gsap'
+import { isLowEndDevice, prefersReducedMotion } from '@/lib/performance'
+import SplashScreen from './SplashScreen'
+
+const Konami = dynamic(() => import('./Konami'), { ssr: false })
+const BackToTop = dynamic(() => import('./BackToTop'))
+const StarsCanvas = dynamic(() => import('./StarBackground'), { ssr: false })
+const CyberDotCursor = dynamic(() => import('./CyberDotCursor'), { ssr: false })
+
+export default function AppLayout({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(true)
+  const mainRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (sessionStorage.getItem('hasSeenSplash')) {
+      setLoading(false)
+    }
+  }, [])
+
+  // GSAP ScrollTrigger animate sections on scroll
+  useEffect(() => {
+    if (loading || !mainRef.current) return
+
+    const reducedMotion = prefersReducedMotion()
+    if (reducedMotion) return
+
+    const lowEnd = isLowEndDevice()
+
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        const sections = mainRef.current!.querySelectorAll('section')
+
+        sections.forEach((section) => {
+          if (section.id === 'projects') return
+
+          const heading = section.querySelector('h2')
+          if (heading) {
+            gsap.fromTo(heading,
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: lowEnd ? 0.4 : 0.7,
+                ease: 'power3.out',
+                scrollTrigger: {
+                  trigger: heading,
+                  start: 'top 90%',
+                  toggleActions: 'play none none none',
+                },
+              }
+            )
+          }
+
+          const cards = section.querySelectorAll(
+            '.grid > a, .grid > div, .space-y-12 > div, .space-y-24 > div'
+          )
+          if (cards.length > 0) {
+            gsap.fromTo(cards,
+              { y: lowEnd ? 15 : 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: lowEnd ? 0.3 : 0.5,
+                stagger: lowEnd ? 0.05 : 0.1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                  trigger: section,
+                  start: 'top 85%',
+                  toggleActions: 'play none none none',
+                },
+              }
+            )
+          }
+        })
+      }, mainRef)
+
+      return () => ctx.revert()
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [loading])
+
+  const loadingClass = loading ? 'h-screen overflow-hidden opacity-0' : 'opacity-100'
+
+  return (
+    <>
+      {loading && <SplashScreen onComplete={() => {
+        sessionStorage.setItem('hasSeenSplash', 'true')
+        setLoading(false)
+      }} />}
+
+      {/* Hidden Hint for CTF Players */}
+      {/* Hint: Try the Konami Code... (Up, Up, Down, Down, Left, Right, Left, Right, B, A) */}
+
+      <div className={`min-h-screen relative font-satoshi selection:bg-cyber-green-dark dark:selection:bg-cyber-green selection:text-white dark:selection:text-black transition-colors duration-300 ${loadingClass}`}>
+        <Konami />
+        <CyberDotCursor />
+
+        {/* Global Backgrounds */}
+        <div className="fixed inset-0 z-0 bg-gradient-to-b from-[#020a05] via-[#030a06] to-[#020a04]"></div>
+        <div className="fixed inset-0 z-[0] bg-[radial-gradient(ellipse_at_top,_#00ff9d10_0%,_transparent_100%)] pointer-events-none"></div>
+        <StarsCanvas />
+
+        <div id="main-content" ref={mainRef} className="relative z-20">
+          {children}
+        </div>
+
+        <BackToTop />
+      </div>
+    </>
+  )
+}
