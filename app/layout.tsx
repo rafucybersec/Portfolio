@@ -129,6 +129,21 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans" suppressHydrationWarning>
+        <noscript>
+          <div style={{ padding: '2rem', color: '#00ff9d', background: '#020a05', fontFamily: 'system-ui, sans-serif' }}>
+            <h1>Muhammad Rafay Ali — Cyber Security Engineer</h1>
+            <p>Cyber Security Engineer specializing in SOC operations, SIEM engineering, threat detection, and incident response. 2+ years of experience deploying Wazuh, building custom detection rules, and managing enterprise security operations.</p>
+            <p>Certified: ISO/IEC 27001 Lead Auditor | ISC2 CC | Google Cybersecurity Professional | SOC Analyst Foundation</p>
+            <p>Skills: Wazuh, Splunk, QRadar, MITRE ATT&amp;CK, Python, Active Directory, Penetration Testing, Threat Intelligence</p>
+            <p>Contact: <a href="mailto:muhammad.rafayali@outlook.com" style={{ color: '#00e1ff' }}>muhammad.rafayali@outlook.com</a></p>
+            <nav>
+              <a href="/projects" style={{ color: '#00ff9d', marginRight: '1rem' }}>Projects</a>
+              <a href="/experience" style={{ color: '#00ff9d', marginRight: '1rem' }}>Experience</a>
+              <a href="/skills" style={{ color: '#00ff9d', marginRight: '1rem' }}>Skills</a>
+              <a href="/contact" style={{ color: '#00ff9d' }}>Contact</a>
+            </nav>
+          </div>
+        </noscript>
         <Providers>
         <StructuredData />
         <ErrorBoundary>

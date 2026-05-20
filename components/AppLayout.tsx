@@ -12,13 +12,13 @@ const StarsCanvas = dynamic(() => import('./StarBackground'), { ssr: false })
 const CyberDotCursor = dynamic(() => import('./CyberDotCursor'), { ssr: false })
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const mainRef = useRef<HTMLDivElement>(null)
   const gsapCtxRef = useRef<gsap.Context | null>(null)
 
   useEffect(() => {
-    if (sessionStorage.getItem('hasSeenSplash')) {
-      setLoading(false)
+    if (!sessionStorage.getItem('hasSeenSplash')) {
+      setLoading(true)
     }
   }, [])
 
@@ -113,7 +113,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     }
   }, [loading])
 
-  const loadingClass = loading ? 'h-screen overflow-hidden opacity-0' : 'opacity-100'
+  // Content is always visible in the DOM for SEO crawlers.
+  // The splash screen overlays on top (z-[100]) for visual users.
+  const loadingClass = loading ? 'h-screen overflow-hidden' : ''
 
   return (
     <>
